@@ -3,15 +3,44 @@
 </div>
     <h1 class="app">City List</h1>
     <div class="custom">
-        <select>
+      <select style="background-color: rgb(248, 246, 246); 
+        height: 40px; 
+        width: 20%;
+         border-style: none;
+         font-style:italic ;
+         border:1px solid rgb(175, 173, 173);">
+  
               <option value="0">Select State:</option>
             </select>
-            <input type="text" placeholder="enter here">
-            <input type="text" placeholder="upload CSV">
-            <button>Submit
-            </button>
-           
-    </div>
+
+            <input type="text" placeholder="Enter City Name"
+            style="background-color: rgb(248, 246, 246); 
+            height: 40px; 
+            width: 30%;
+            margin-left: 20px;
+            border-style: none;
+          padding:15px;
+          font-style:italic ;
+          border:1px solid rgb(175, 173, 173);">
+   
+            <input type="text" placeholder="Upload CSV"
+          style="background-color: rgb(248, 246, 246); 
+          height: 40px; width:20%;
+          margin-left: 20px;
+          
+          border-style: none;
+          padding:15px;
+          font-style:italic ;
+          border:1px solid rgb(175, 173, 173);">
+   
+          <!--submit button style-->
+          <a class="btn btn-success" style="background-color:#10847E;
+                    width: 20%;
+                    color: white; margin-left: 10px;">Submit</a>
+         
+  </div>
+
+
 
 <!--table of service-->
 <table class="table align-middle mb-0 bg-white">
@@ -20,21 +49,31 @@
             <th style="color:#a7a4a4;">Show<button style="border-radius: 5px;background: #FFFFFF;
                 border: 0.5px solid #10847E;box-sizing: border-box;
                 margin-left: 10px; margin-right: 10px; font-size: 15px;">05
-                            <i class='fa fa-sort'></i>
+                            <i class='fa fa-sort' style="color: blue;"></i>
     
             </button>entries</th>
         </tr>
       <tr>
-        <th>Sr. No./ City Id <i class="fa fa-arrow-down"></i>
-            <i class="fa fa-arrow-up"></i>
+        <th>Sr. No./ City Id 
+          <i class="fa fa-arrow-down" 
+          style="color: rgb(199, 194, 194);
+           margin-left: 10px;"></i>
+            <i class="fa fa-arrow-up"
+            style="color: rgb(199, 194, 194);" ></i>
         </th>
         <th>City Name
-            <i class="fa fa-arrow-down"></i>
-            <i class="fa fa-arrow-up"></i>
+          <i class="fa fa-arrow-down" 
+          style="color: rgb(199, 194, 194);
+           margin-left: 10px;"></i>
+            <i class="fa fa-arrow-up"
+            style="color: rgb(199, 194, 194);" ></i>
         </th>
         <th>url
-            <i class="fa fa-arrow-down"></i>
-            <i class="fa fa-arrow-up"></i>
+          <i class="fa fa-arrow-down" 
+          style="color: rgb(199, 194, 194);
+           margin-left: 10px;"></i>
+            <i class="fa fa-arrow-up"
+            style="color: rgb(199, 194, 194);" ></i>
             
         </th>
        
@@ -236,8 +275,12 @@
       <tr>
         <td>show 1 to 10 entries</td>
         <td></td>
-        <td style="color:rgb(114, 111, 111); font-size:17px">Previous<span><button style="background-color:#10847E;
-            width:15%;margin-left: 10px; margin-right: 10px;" 
+        <td style="color:rgb(114, 111, 111); font-size:17px;">Previous<span>
+          <button style="background-color:#10847E;
+            width:15%;
+            border-style: none;
+            color: white;
+            margin-left: 10px; margin-right: 10px;" 
             >1</button></span>Next</td>
       </tr>
        </tbody>

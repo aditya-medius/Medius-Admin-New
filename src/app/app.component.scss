@@ -1,8 +1,8 @@
 .v1{
 	position: absolute;
-width: 39.57px;
+width: 50px;
 height: 7.61px;
-left: 41.61px;
+left: 10px;
 top: 49px;
 border-radius: 25px;
 
@@ -11,20 +11,20 @@ transform: rotate(90deg);
 }
 .v2{
 	position: absolute;
-width: 27.39px;
+width: 44px;
 height: 7.61px;
-left: 58px;
-top: 55px;
+left:25px;
+top: 52px;
 border-radius: 25px;
 background: #10847E;
 transform: rotate(90deg);
 }
 .v3{
 	position: absolute;
-width: 39.57px;
+width:50px;
 height: 7.61px;
-left: 63px;
-top: 49px;
+left:35px;
+top:50px;
 border-radius: 25px;
 background: #3EBAFF;
 transform: rotate(90deg);
@@ -36,7 +36,7 @@ transform: rotate(90deg);
 }
 .logo
 {
-				font-size:25px;
+				font-size:40px;
 				font-family:verdana;
 				text-align:left;
 				margin-top:0px;
@@ -45,24 +45,31 @@ transform: rotate(90deg);
 				margin-top:30px;
 				line-height:50px;
 				padding-left:100px;
-					background: -webkit-linear-gradient(rgb(222, 45, 45), rgb(93, 41, 250));
+					background: -webkit-linear-gradient(rgb(75, 78, 213), 
+					rgb(233, 41, 118) ,rgb(31, 130, 31));
 					-webkit-background-clip: text;
 					-webkit-text-fill-color: transparent;
 
 }
-.icon{
-	padding-top: 45px;
-	padding-left: 100px;
-	font-size: 25px;
+.health{
+	padding-top:50px;
+	padding-left: 50px;
+	font-size: 30px;
 	display: inline-flex;
 }
-form{
-	margin-right: 40px;
-	padding-left: 150px;
-}
-input[type="search"]{
-	margin-right: 30px;
-}
-input[type="search"]::placeholder {
-	color: #bbb;
+.input-container {
+	display: -ms-flexbox; /* IE10 */
+	display: flex;
+	width: 100%;
+	margin-left: 40px;
+	background: rgb(223, 231, 242);
+
   }
+  .icon {
+	padding: 10px;
+	background: rgb(182, 207, 242);
+	color: white;
+	min-width: 50px;
+	text-align: center;
+  }
+  
