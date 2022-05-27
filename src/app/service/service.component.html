@@ -17,6 +17,22 @@
       border: 1px solid rgb(175, 173, 173);
     "
   />
+
+  <input
+    #fileInput
+    type="file"
+    id="file"
+    style="
+      background-color: rgb(248, 246, 246);
+      height: 40px;
+      width: 50%;
+      border-style: none;
+      padding: 20px;
+      font-style: italic;
+      border: 1px solid rgb(175, 173, 173);
+    "
+    (change)="uploadSpecialization($event.target.files)"
+  />
   <!--submit button style-->
   <a
     class="btn btn-success"
@@ -114,27 +130,26 @@
           >
         </td>
       </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td style="color: rgb(114, 111, 111); font-size: 17px">
+          Previous<span>
+            <button
+              style="
+                background-color: #10847e;
+                border-style: none;
+                color: white;
+                margin-left: 10px;
+                margin-right: 10px;
+                padding: 10px 20px;
+              "
+            >
+              1
+            </button> </span
+          >Next
+        </td>
+      </tr>
     </ng-container>
-    <tr>
-      <td></td>
-      <td></td>
-      <td style="color: rgb(114, 111, 111); font-size: 17px">
-        Previous<span>
-          <button
-            style="
-              background-color: #10847e;
-              width: 15%;
-              height: 90%;
-              border-style: none;
-              color: white;
-              margin-left: 10px;
-              margin-right: 10px;
-            "
-          >
-            1
-          </button></span
-        >Next
-      </td>
-    </tr>
   </tbody>
 </table>

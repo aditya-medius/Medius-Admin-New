@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from '../Services/service.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { ServiceService } from '../Services/service.service';
   styleUrls: ['./service.component.scss'],
 })
 export class ServiceComponent implements OnInit {
-  constructor(private service: ServiceService) {}
+  constructor(
+    private service: ServiceService,
+    private toastrService: ToastrService
+  ) {}
 
   speciality: Array<any> | null = null;
   serviceName: string | null = null;
@@ -22,13 +26,44 @@ export class ServiceComponent implements OnInit {
     });
   };
 
+  formData: FormData = new FormData();
+  uploadSpecialization(fileToUpload: any) {
+    fileToUpload = fileToUpload[0];
+    (this.formData as FormData).append(
+      'profileImage',
+      fileToUpload,
+      fileToUpload.name
+    );
+    (this.formData as FormData).append('user', 'specializations');
+  }
+
   submitService = () => {
+    if (!this.serviceName) {
+      this.toastrService.error('Enter a service name');
+      return;
+    }
     this.service
       .addSpeciality(this.serviceName as string)
       .subscribe((result: any) => {
-        console.log('result', result);
-        this.serviceName = null;
-        this.getAllServices();
+        if (result.statues === 400) {
+          this.toastrService.error(result.message);
+        } else {
+          this.formData.append('userId', result.data._id);
+          this.service
+            .uploadServiceImage(this.formData as FormData)
+            .subscribe((res: any) => {
+              if (res.status === 200) {
+                this.getAllServices();
+                this.formData.delete('profileImage');
+                this.formData.delete('user');
+                this.formData.delete('userId');
+                this.serviceName = null;
+              } else {
+                this.toastrService.error('Upload unsuccessful.');
+              }
+            });
+          this.getAllServices();
+        }
       });
   };
 }
