@@ -31,4 +31,15 @@ export class ServiceService {
       headers: headers,
     });
   };
+
+  getServices = () => {
+    return this.httpClient.get(`${apiUrl}/hospital/getServices`, {});
+  };
+
+  addService = (name: string, serviceType: string) => {
+    return this.httpClient.post(`${apiUrl}/admin/addHospitalService`, {
+      name,
+      serviceType,
+    });
+  };
 }

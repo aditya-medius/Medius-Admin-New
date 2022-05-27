@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from '../Services/service.service';
 
@@ -10,7 +11,8 @@ import { ServiceService } from '../Services/service.service';
 export class ServiceComponent implements OnInit {
   constructor(
     private service: ServiceService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private fb: FormBuilder
   ) {}
 
   speciality: Array<any> | null = null;
@@ -20,50 +22,32 @@ export class ServiceComponent implements OnInit {
     this.getAllServices();
   }
 
+  serviceForm = this.fb.group({
+    name: ['', Validators.required],
+    serviceType: ['', Validators.required],
+  });
+
   getAllServices = () => {
-    this.service.getAllServices().subscribe((result: any) => {
-      this.speciality = result.data['Speciality'];
+    this.service.getServices().subscribe((result: any) => {
+      this.speciality = result.data;
     });
   };
 
-  formData: FormData = new FormData();
-  uploadSpecialization(fileToUpload: any) {
-    fileToUpload = fileToUpload[0];
-    (this.formData as FormData).append(
-      'profileImage',
-      fileToUpload,
-      fileToUpload.name
-    );
-    (this.formData as FormData).append('user', 'specializations');
-  }
-
   submitService = () => {
-    if (!this.serviceName) {
-      this.toastrService.error('Enter a service name');
+    if (!this.serviceForm.valid) {
+      this.toastrService.error('Enter proper values');
       return;
     }
-    this.service
-      .addSpeciality(this.serviceName as string)
-      .subscribe((result: any) => {
-        if (result.statues === 400) {
-          this.toastrService.error(result.message);
-        } else {
-          this.formData.append('userId', result.data._id);
-          this.service
-            .uploadServiceImage(this.formData as FormData)
-            .subscribe((res: any) => {
-              if (res.status === 200) {
-                this.getAllServices();
-                this.formData.delete('profileImage');
-                this.formData.delete('user');
-                this.formData.delete('userId');
-                this.serviceName = null;
-              } else {
-                this.toastrService.error('Upload unsuccessful.');
-              }
-            });
-          this.getAllServices();
-        }
-      });
+    let { name, serviceType } = this.serviceForm.value;
+    let type = serviceType ? 'Primary' : 'Secondary';
+    this.service.addService(name, type).subscribe((result: any) => {
+      if (result.status === 400) {
+        this.toastrService.error(result.message);
+      } else {
+        this.toastrService.success(result.message);
+        this.serviceForm.reset();
+        this.getAllServices();
+      }
+    });
   };
 }

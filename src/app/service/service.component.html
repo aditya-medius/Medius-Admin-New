@@ -3,48 +3,37 @@
 </div>
 <h1 class="app">Services</h1>
 <div class="custom">
-  <input
-    [(ngModel)]="serviceName"
-    type="text"
-    placeholder="Enter Service name.."
-    style="
-      background-color: rgb(248, 246, 246);
-      height: 40px;
-      width: 50%;
-      border-style: none;
-      padding: 20px;
-      font-style: italic;
-      border: 1px solid rgb(175, 173, 173);
-    "
-  />
+  <form [formGroup]="serviceForm">
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="Enter Service name.."
+      style="
+        background-color: rgb(248, 246, 246);
+        height: 40px;
+        width: 50%;
+        border-style: none;
+        padding: 20px;
+        font-style: italic;
+        border: 1px solid rgb(175, 173, 173);
+      "
+    />
 
-  <input
-    #fileInput
-    type="file"
-    id="file"
-    style="
-      background-color: rgb(248, 246, 246);
-      height: 40px;
-      width: 50%;
-      border-style: none;
-      padding: 20px;
-      font-style: italic;
-      border: 1px solid rgb(175, 173, 173);
-    "
-    (change)="uploadSpecialization($event.target.files)"
-  />
-  <!--submit button style-->
-  <a
-    class="btn btn-success"
-    style="
-      background-color: #10847e;
-      width: 20%;
-      color: white;
-      margin-left: 35px;
-    "
-    (click)="submitService()"
-    >Submit</a
-  >
+    <mat-checkbox formControlName="serviceType">Primary</mat-checkbox>
+
+    <!--submit button style-->
+    <a
+      class="btn btn-success"
+      style="
+        background-color: #10847e;
+        width: 20%;
+        color: white;
+        margin-left: 35px;
+      "
+      (click)="submitService()"
+      >Submit</a
+    >
+  </form>
 </div>
 
 <!--table of service-->
@@ -108,7 +97,7 @@
           </div>
         </td>
         <td>
-          <p class="fw-normal mb-1">{{ data.specialityName }}</p>
+          <p class="fw-normal mb-1">{{ data.name }}</p>
         </td>
         <td>
           <a

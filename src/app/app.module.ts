@@ -28,8 +28,10 @@ import { OwnershipComponent } from './ownership/ownership.component';
 import { StateComponent } from './state/state.component';
 import { CityComponent } from './city/city.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ImagePipe } from './Pipes/image.pipe';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
     OwnershipComponent,
     StateComponent,
     CityComponent,
+    ImagePipe,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,9 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
