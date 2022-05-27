@@ -18,64 +18,45 @@ import { StateComponent } from './state/state.component';
 import { CityComponent } from './city/city.component';
 
 const routes: Routes = [
-  {path :"dashboard", 
-  component :DashboardComponent
-},
+  { path: 'dashboard', component: DashboardComponent },
 
-  {path :"appointment", 
-  component :AppointmentComponent
-},
-  {path :"hospital", 
-  component :HospitalsComponent
-},
+  { path: 'appointment', component: AppointmentComponent },
+  { path: 'hospital', component: HospitalsComponent },
 
-  {path :"doctor", 
-  component :DoctorComponent
-},
+  { path: 'doctor', component: DoctorComponent },
 
-  {path :"user", 
-  component :UserComponent
-},
+  { path: 'user', component: UserComponent },
   {
-    path :'services',
-   component :ServiceComponent
+    path: 'services',
+    component: ServiceComponent,
   },
 
-  {path :'speciality', 
-  component :SpecialityComponent
-},
-  {path :'qualification', 
-  component :QualificationComponent
-},
-  {path :'location', 
-  component :LocationComponent
-},
+  { path: 'speciality', component: SpecialityComponent },
+  { path: 'qualification', component: QualificationComponent },
+  { path: 'location', component: LocationComponent },
 
-  {path :'payment', 
-  component :ModeOfPaymentComponent
-},
-{
-  path :'amenities',
-  component:AmenitiesComponent
-},
+  { path: 'payment', component: ModeOfPaymentComponent },
+  {
+    path: 'amenities',
+    component: AmenitiesComponent,
+  },
 
-{
-  path : 'Ownership',
-  component:OwnershipComponent
-},
-{
-  path: 'state',
-  component: StateComponent
-},
-{
-  path:'city',
-  component: CityComponent
-},
-
+  {
+    path: 'Ownership',
+    component: OwnershipComponent,
+  },
+  {
+    path: 'state',
+    component: StateComponent,
+  },
+  {
+    path: 'city',
+    component: CityComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
