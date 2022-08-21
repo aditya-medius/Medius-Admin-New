@@ -9,11 +9,13 @@ import { apiUrl } from './Util/Util';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) {
+    this.login();
+  }
   title = 'Angular-App';
 
   ngOnInit(): void {
-    this.login();
+    // this.login();
   }
   login = () => {
     let url: string = `${apiUrl}/admin/login?phoneNumber=8826332442&password=123456`;
