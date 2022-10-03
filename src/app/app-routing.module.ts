@@ -16,6 +16,7 @@ import { OwnershipComponent } from './ownership/ownership.component';
 import { compileClassMetadata } from '@angular/compiler';
 import { StateComponent } from './state/state.component';
 import { CityComponent } from './city/city.component';
+import { PatientsComponent } from './patients/patients.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'doctor', component: DoctorComponent },
 
   { path: 'user', component: UserComponent },
+  { path: 'patients', component: PatientsComponent },
   {
     path: 'services',
     component: ServiceComponent,

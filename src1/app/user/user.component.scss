@@ -1,0 +1,65 @@
+.box{
+    position: absolute;
+width:70%;
+height:400px;
+left: 324px;
+top: 176px;
+
+background: white;
+border-radius: 10px;
+}
+.circle
+{
+    position: absolute;
+width: 130px;
+height: 130px;
+left: 80px;
+top: 80px;
+border-radius: 50%;
+background: #C4C4C4;
+}
+.circle button{
+    width: 60px;
+height: 43px;
+    margin-top: 30px;
+    margin-left:700px;
+    background: #10847E;
+border-radius: 5px;
+color: white;
+}
+h1{
+    margin-left: 200px;
+    margin-top: 10px;
+    color: black;
+}
+.circle p{
+    margin-left: 200px;
+    margin-top:5px;
+    color: rgb(9, 7, 7);
+}
+.intro hr{
+    position: absolute;
+width: 950px;
+height: 0px;
+top:300px;
+
+border: 1px solid #757575;
+}
+
+.detail
+{
+    position: absolute;
+width:70%;
+height: 367px;
+left: 324px;
+top: 621px;
+
+background: #FFFFFF;
+border-radius: 10px;
+}
+.info{
+    margin-left: 280px;
+    color: black;
+    font-style: bold;
+
+}

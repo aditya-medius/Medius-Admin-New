@@ -1,42 +1,42 @@
-.content{
-    position: absolute;
-    width: 259px;
-    height: 22px;
-    left: 334px;
-    top: 221px;
-    
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    
-    color: #757575;    
-}
-.app{
-    position: absolute;
-width: 250px;
-height: 30px;
-left: 334px;
-top: 174px;
+// .content{
+//     position: absolute;
+//     width: 259px;
+//     height: 22px;
+//     left: 334px;
+//     top: 221px;
 
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 600;
-font-size: 25px;
-line-height: 30px;
+//     font-family: 'Roboto';
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 18px;
+//     line-height: 21px;
 
-color: #757575;
-}
-.table{
-    position: absolute;
-width: 75%;
-height: 600px;
-left: 330px;
-top: 266px;
-background: white;
-border-radius: 10px;
-}
+//     color: #757575;
+// }
+// .app{
+//     position: absolute;
+// width: 250px;
+// height: 30px;
+// left: 334px;
+// top: 174px;
+
+// font-family: 'Roboto';
+// font-style: normal;
+// font-weight: 600;
+// font-size: 25px;
+// line-height: 30px;
+
+// color: #757575;
+// }
+// .table{
+//     position: absolute;
+// width: 75%;
+// height: 600px;
+// left: 330px;
+// top: 266px;
+// background: white;
+// border-radius: 10px;
+// }
 //::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
   //  background-color:white /*replace with your color*/
 //}
@@ -44,3 +44,15 @@ border-radius: 10px;
 //::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
    // background-color: rgb(22, 184, 28);  /*replace with your color*/
 //}
+
+.start {
+  padding: 2% 0;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
