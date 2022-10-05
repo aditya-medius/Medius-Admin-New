@@ -1,9 +1,9 @@
-<div class="content">
+<!-- <div class="content">
     <p>Dashboard <span style="color: rgb(186, 185, 185);">/Appointments</span></p>
 </div>
     <h1 class="app">Appointments</h1>
-    
- <!--Table of appointsment-->
+
+ Table of appointsment
  <table class="table align-middle mb-0 bg-white">
     <thead class="bg-white">
         <tr>
@@ -11,12 +11,12 @@
                 border: 0.5px solid #10847E;box-sizing: border-box;
                 margin-left: 10px; margin-right: 10px; font-size: 15px;">10
                               <i class='fa fa-sort' style="color: blue;"></i>
-  
+
               </button>entries</th>
         </tr>
       <tr>
         <th>User Name
-          <i class="fa fa-arrow-down" 
+          <i class="fa fa-arrow-down"
           style="color: rgb(199, 194, 194);
            margin-left: 10px;"></i>
             <i class="fa fa-arrow-up"
@@ -25,7 +25,7 @@
         </th>
         <th>Booking ID
 
-          <i class="fa fa-arrow-down" 
+          <i class="fa fa-arrow-down"
           style="color: rgb(199, 194, 194);
            margin-left: 10px;"></i>
             <i class="fa fa-arrow-up"
@@ -33,7 +33,7 @@
         </th>
         <th>Doctor Name
 
-          <i class="fa fa-arrow-down" 
+          <i class="fa fa-arrow-down"
           style="color: rgb(199, 194, 194);
            margin-left: 10px;"></i>
             <i class="fa fa-arrow-up"
@@ -41,7 +41,7 @@
         </th>
         <th>Appointments
 
-          <i class="fa fa-arrow-down" 
+          <i class="fa fa-arrow-down"
           style="color: rgb(199, 194, 194);
            margin-left: 10px;"></i>
             <i class="fa fa-arrow-up"
@@ -51,7 +51,7 @@
 
         <th>Status
 
-          <i class="fa fa-arrow-down" 
+          <i class="fa fa-arrow-down"
           style="color: rgb(199, 194, 194);
            margin-left: 10px;"></i>
             <i class="fa fa-arrow-up"
@@ -59,7 +59,7 @@
         </th>
 
         <th>Amount
-          <i class="fa fa-arrow-down" 
+          <i class="fa fa-arrow-down"
           style="color: rgb(199, 194, 194);
            margin-left: 10px;"></i>
             <i class="fa fa-arrow-up"
@@ -87,7 +87,7 @@
           <p class="text-muted mb-0">Booking date :20 mar 2022</p>
         </td>
         <td>
-            
+
             <div class="d-flex align-items-center">
                 <img
                     src="https://mdbootstrap.com/img/new/avatars/8.jpg"
@@ -98,7 +98,7 @@
                   <p class="fw-normal mb-1">Dharmraj Acharya</p>
                   <p class="text-muted mb-0">Male <span>32 year old</span></p>
                 </div>
-              </div> 
+              </div>
                      </td>
             <td>
                 <p class="fw-normal mb-1">30 mar 2022</p>
@@ -130,7 +130,7 @@
           <p class="text-muted mb-0">Booking date :20 mar 2022</p>
         </td>
         <td>
-            
+
             <div class="d-flex align-items-center">
                 <img
                     src="https://mdbootstrap.com/img/new/avatars/8.jpg"
@@ -148,7 +148,7 @@
               </td>
               <td>
                 <mat-slide-toggle color="green"></mat-slide-toggle>
-                  
+
         </td>
               <td>
                 <p class="fw-normal mb-1">300 rs.</p>
@@ -173,7 +173,7 @@
           <p class="text-muted mb-0">Booking date :20 mar 2022</p>
         </td>
         <td>
-            
+
             <div class="d-flex align-items-center">
                 <img
                     src="https://mdbootstrap.com/img/new/avatars/8.jpg"
@@ -215,7 +215,7 @@
           <p class="text-muted mb-0">Booking date :20 mar 2022</p>
         </td>
         <td>
-            
+
             <div class="d-flex align-items-center">
                 <img
                     src="https://mdbootstrap.com/img/new/avatars/8.jpg"
@@ -242,5 +242,160 @@
           <td>Showing 1 to 10 of 10 entites</tr>
         </tbody>
   </table>
-     
 
+ -->
+
+ <div class="start">
+  <h1 style="color: grey; font-weight: 500; font-size: 30px;">Appointments</h1>
+  <nav aria-label="breadcrumb" style="font-size: 21px; font-weight: 500;">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <!-- <a href="#"> -->
+        Dashboard
+        <!-- </a> -->
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+    </ol>
+  </nav>
+  <!-- <div class="row">
+    <div class="mb-3 col-lg-3 col-sm-5">
+      <select class="form-select" aria-label="Default select example">
+        <option selected disabled>Select City</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="mb-3 col-lg-3 col-sm-5">
+      <input type="text" class="form-control" aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default" placeholder="Enter Locality Name">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn" style="background: #10847E; color: white;">Submit</button>
+    </div>
+  </div> -->
+  <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+    </mat-paginator> -->
+
+  <!-- <div class="mat-elevation-z8"> -->
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8">
+
+    <!-- User name Column -->
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by User name"
+        style="font-family: 'Roboto'; font-size: 16px;"> UserName </th>
+      <td mat-cell *matCellDef="let element"> 
+        <p style="margin: 5% 0 0 0;">{{element.userName}}</p>
+        <p>{{element.gender}} | {{element.age}}</p>
+        <!-- <p>Male | 32yrs.</p> -->
+      </td>
+    </ng-container>
+
+    <!-- Booking ID Column -->
+    <ng-container matColumnDef="bookingId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Booking Id"
+        style="font-family: 'Roboto'; font-size: 16px;"> Booking ID </th>
+      <td mat-cell *matCellDef="let element">
+        <p style="margin: 5% 0 0 0;">Booking ID: {{element.bookingId}}</p>
+        <p>Booking Date: {{element.bookingDate}}</p>
+        <!-- {{element.bookingId}}  -->
+      </td>
+    </ng-container>
+
+    <!-- Doctor Name Column -->
+    <ng-container matColumnDef="doctorName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Doctor Name"
+        style="font-family: 'Roboto'; font-size: 16px;"> Doctor Name </th>
+      <td mat-cell *matCellDef="let element"> 
+        <!-- {{element.doctorName}}  -->
+        <p style="margin: 5% 0 0 0; color: #3EBAFF;">{{element.doctorName}}</p>
+        <p style="margin: 0;">{{element.specialization}}</p>
+        <p style="color: #3EBAFF;">{{element.hospitalName}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Appointment Time Column -->
+    <ng-container matColumnDef="appointmentTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Appointment Time"
+        style="font-family: 'Roboto'; font-size: 16px;"> Appointment Time </th>
+      <td mat-cell *matCellDef="let element"> 
+        <!-- {{element.appointmentTime}}  -->
+        <p style="margin: 5% 0 0 0;">{{element.appointmentDate}}</p>
+        <p style="color: #3EBAFF;">{{element.appointmentTime}}</p>
+      </td>
+    </ng-container>
+
+    <!-- Ammount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Ammount"
+        style="font-family: 'Roboto'; font-size: 16px;"> Amount </th>
+      <td mat-cell *matCellDef="let element"> <i class="fa fa-rupee"></i>{{element.amount}} </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Status"
+        style="font-family: 'Roboto'; font-size: 16px;"> Status </th>
+      <td mat-cell *matCellDef="let element"> 
+        <!-- {{element.status}}  -->
+        <p style="margin: 5% 0 0 0; color: #757575; font-weight: 700; font-family: Roboto; font-size: 14px; line-height: 16px; letter-spacing: 0em; text-align: left;">{{element.status1}}</p>
+        <p>{{element.status2}}</p>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+  <!-- </div> -->
+
+</div>
+
+<!-- Edit Modal Start-->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel" style="font-size: 25px;
+        margin-bottom: 0px; font-weight: 500;">Edit Locality List</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin: 0;">
+          <div class="col-sm">
+            <label for="" style="font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 30px; color: #757575;">City Name</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected disabled>City State</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="" style="font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 30px; color: #757575;">Locality Name</label>
+            <div class="col-sm">
+              <input type="text" class="form-control" style="margin: 2% 0;" name="LocalityName" id="LocalityName">
+            </div>
+          </div>
+        </div>
+        <p>Edit Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Edit Modal End-->

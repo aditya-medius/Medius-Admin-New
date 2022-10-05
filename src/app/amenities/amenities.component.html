@@ -1,9 +1,9 @@
-<div class="content">
+<!-- <div class="content">
   <p>Essentials<span style="color: rgb(186, 185, 185)">/Amenities</span></p>
 </div>
 <h1 class="app">Amenities</h1>
-<div class="custom">
-  <form [formGroup]="amenityForm">
+<div class="custom"> -->
+  <!-- <form [formGroup]="amenityForm">
     <input
       type="text"
       formControlName="amenity"
@@ -22,7 +22,7 @@
     <mat-checkbox formControlName="isPrimary" class="example-margin">
       Primary
     </mat-checkbox>
-    <!--submit button style-->
+    submit button style
     <a
       class="btn btn-success"
       style="
@@ -34,11 +34,11 @@
       (click)="addAmenity()"
       >Submit</a
     >
-  </form>
-</div>
+  </form> -->
+<!-- </div> -->
 
 <!--table of service-->
-<table class="table align-middle mb-0 bg-white">
+<!-- <table class="table align-middle mb-0 bg-white">
   <thead class="bg-white">
     <tr>
       <th style="color: #a7a4a4">
@@ -142,4 +142,120 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+<div class="start">
+  <h1 style="color: grey; font-weight: 500; font-size: 30px;">Amenities</h1>
+  <nav aria-label="breadcrumb" style="font-size: 21px; font-weight: 500;">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <!-- <a href="#"> -->
+        Essentials
+        <!-- </a> -->
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Amenities</li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="mb-3 col-sm-5">
+      <input type="text" class="form-control" aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default" placeholder="Enter Amenity Name">
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn" style="background: #10847E; color: white;">Submit</button>
+    </div>
+  </div>
+  <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+    </mat-paginator> -->
+
+  <!-- <div class="mat-elevation-z8"> -->
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8">
+
+    <!-- SR. No. Column -->
+    <ng-container matColumnDef="srno">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Serial Number"
+        style="font-family: 'Roboto'; font-size: 16px;"> Sr. No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.srno}} </td>
+    </ng-container>
+
+    <!-- Qualification Column -->
+    <ng-container matColumnDef="amenityName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Amenity Name"
+        style="font-family: 'Roboto'; font-size: 16px;"> Amenity Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.amenityName}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol"
+        style="font-family: 'Roboto'; font-size: 16px;"> Actions </th>
+      <!-- <td mat-cell *matCellDef="let element"> {{element.actions}} </td> -->
+      <td mat-cell *matCellDef="let element">
+        <button type="button" class="btn btn-success btn-sm" style="background: rgb(61 173 21 / 0.3);
+              margin: 1%;
+              height: 50px;
+              width: 92px;
+              border-radius: 5px;
+              font-family: 'Roboto';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 16px;
+              color: #3DAD15;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-pencil"></i>
+          &nbsp; Edit</button>
+        <button type="button" class="btn btn-danger btn-sm" style="background: rgba(211, 22, 22, 0.28);
+          border-radius: 5px;
+          width: 92px;
+          height: 50px;
+          font-family: 'Roboto';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+          color: #D31616;" (click)="deleteFunc()"><i class="fa fa-trash-o"></i> &nbsp; Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+  <!-- </div> -->
+
+</div>
+
+<!-- Edit Modal Start-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel" style="font-size: 25px;
+        margin-bottom: 0px; font-weight: 500;">Edit Amenity</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <!-- <div class="row" style="margin: 0;">
+          <div class="col-sm"> -->
+            <label for="" style="font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 30px; color: #757575;">Amenity Name</label>
+            <div class="col-sm-5" style="margin: auto;">
+              <input type="text" class="form-control" style="margin: 2% 0;" name="AmenityName" id="AmenityName">
+            </div>
+          <!-- </div>
+        </div> -->
+        <!-- <p>Edit Modal body text goes here.</p> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Modal End-->

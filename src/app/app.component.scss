@@ -45,7 +45,7 @@ transform: rotate(90deg);
 				margin-top:30px;
 				line-height:50px;
 				padding-left:100px;
-					background: -webkit-linear-gradient(rgb(75, 78, 213), 
+					background: -webkit-linear-gradient(rgb(75, 78, 213),
 					rgb(233, 41, 118) ,rgb(31, 130, 31));
 					-webkit-background-clip: text;
 					-webkit-text-fill-color: transparent;
@@ -72,4 +72,83 @@ transform: rotate(90deg);
 	min-width: 50px;
 	text-align: center;
   }
-  
+
+////////////////////////////// Extra small /////////////////////
+@media screen and (min-width:0px) and (max-width:576px){
+    .medLogo {
+      width: 70%;
+    }
+  }
+
+   ///////////////////////// Small ////////////////////
+  @media screen and (min-width:576) and (max-width:768px){
+    .medLogo {
+      padding-left: 11%;
+      margin-top: 4%;
+      letter-spacing: 8px;
+    }
+  }
+
+  //////////////// Medium	/////////////////////
+  @media screen and (min-width:768px) and (max-width:992px){
+    .medLogo {
+      width: 40%;
+    }
+    .formWidth {
+      width: 43%;
+    }
+  }
+
+   ///////// Large ////////////////////
+  @media screen and (min-width:992px) and (max-width:1200px){
+    .medLogo {
+      padding-left: 11%;
+      margin-top: 4%;
+      letter-spacing: 8px;
+    }
+    .formWidth {
+      width: 45%;
+    }
+  }
+
+  //////////////// Extra large /////////////////////
+  @media screen and (min-width:1200px) and (max-width:1400px){
+    .medLogo {
+      width: 20%;
+    }
+    .formWidth {
+      width: 45%;
+    }
+  }
+
+   ///////// Large ////////////////////
+  @media screen and (min-width:1400px) {
+    .medLogo {
+      width: 20%;
+    }
+    .formWidth {
+      width: 23%;
+    }
+  }
+
+  .dot {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    font-size: 31px;
+    color: #FFFFFF;
+    text-align: center;
+    background: #10847E
+  }
+
+  .logResize {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 25px;
+    color: #FFFFFF;
+    text-align: center;
+    background: #10847E
+}

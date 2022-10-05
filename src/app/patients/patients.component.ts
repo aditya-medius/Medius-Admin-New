@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DoctorService } from '../Services/doctor.service';
-
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -9,13 +8,13 @@ import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-doctor',
-  templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.scss'],
+  selector: 'app-patients',
+  templateUrl: './patients.component.html',
+  styleUrls: ['./patients.component.scss']
 })
-export class DoctorComponent implements OnInit {
+export class PatientsComponent implements OnInit {
 
-  displayedColumns: string[] = ['doctorsName', 'speciality', 'experience', 'appointmentNo', 'status', 'view'];
+  displayedColumns: string[] = ['patientName', 'gender', 'age', 'email', 'mobileNo'];
 
   dataSource: any;
 
@@ -25,9 +24,8 @@ export class DoctorComponent implements OnInit {
     private _liveAnnouncer: LiveAnnouncer
   ) {}
 
-  // doctorList: Array<any> | null = null;
   ngOnInit(): void {
-    this.dataSource = [{doctorsName: 'Dr. Deepak Kumar', speciality: 'Dental', experience: '20 Years', appointmentNo: '15'}, {doctorsName: 'Dr. Deepak', speciality: 'Dental', experience: '18 Years', appointmentNo: '23'}];
+    this.dataSource = [{patientName: 'Dr. Deepak Kumar', gender: 'Male', age: '20', email: 'test@gmail.com', mobileNo: '8265528510'}, {patientName: 'Dr. Deepak', gender: 'Female', age: '18', email: 'test2@gmail.com', mobileNo: '7265528510'}];
     // this.getAllDoctors();
   }
   @ViewChild(MatSort) sort: MatSort;
@@ -50,25 +48,4 @@ export class DoctorComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-
-  // getAllDoctors = () => {
-  //   this.doctorService.getAllDoctorsList().subscribe((result: any) => {
-  //     if (result.status === 200) {
-  //       this.doctorList = result.data;
-  //     } else {
-  //       this.toastrService.error(result.message);
-  //     }
-  //   });
-  // };
-
-  // toggleVerify = (id: string) => {
-  //   this.doctorService.verifyDoctor(id).subscribe((result: any) => {
-  //     if (result.status === 200) {
-  //       this.toastrService.success(result.message);
-  //       this.getAllDoctors();
-  //     } else {
-  //       this.toastrService.error(result.message);
-  //     }
-  //   });
-  // };
 }

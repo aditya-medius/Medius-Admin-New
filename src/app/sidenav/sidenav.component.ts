@@ -81,7 +81,7 @@ export const ROUTES: RouteInfo[] = [
 export class SidenavComponent implements OnInit {
   public menuItems: any[] = [];
   public isCollapsed = true;
-
+  selected: any;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -90,6 +90,33 @@ export class SidenavComponent implements OnInit {
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
     });
+  }
+
+  getSelectedIcon(data) {
+
+    if(this.selected) {
+      document.getElementById(this.selected).style.fontFamily = 'Roboto';
+      document.getElementById(this.selected).style.fontStyle = 'normal';
+      document.getElementById(this.selected).style.fontWeight = '400';
+      document.getElementById(this.selected).style.fontSize = '18px';
+      document.getElementById(this.selected).style.lineHeight = '21px';
+      document.getElementById(this.selected).style.letterSpacing = '0.05em';
+      document.getElementById(this.selected).style.color = '#ffffff';
+      document.getElementById(this.selected).style.background = '';
+    }
+
+
+    this.selected = data;
+
+    document.getElementById(data).style.fontFamily = 'Roboto';
+    document.getElementById(data).style.fontStyle = 'normal';
+    document.getElementById(data).style.fontWeight = '500';
+    document.getElementById(data).style.fontSize = '18px';
+    document.getElementById(data).style.lineHeight = '21px';
+    document.getElementById(data).style.letterSpacing = '0.05em';
+    document.getElementById(data).style.color = 'black';
+    document.getElementById(data).style.background = 'white';
+    console.log(data);
   }
 
 }
