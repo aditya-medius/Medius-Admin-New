@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-doctor',
@@ -15,19 +16,20 @@ import Swal from 'sweetalert2';
 })
 export class DoctorComponent implements OnInit {
 
-  displayedColumns: string[] = ['doctorsName', 'speciality', 'experience', 'appointmentNo', 'status', 'view'];
+  displayedColumns: string[] = ['doctorsName', 'speciality', 'experience', 'mobile', 'appointmentNo', 'status', 'view'];
 
   dataSource: any;
 
   constructor(
     private doctorService: DoctorService,
     private toastrService: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private router: Router
   ) {}
 
   // doctorList: Array<any> | null = null;
   ngOnInit(): void {
-    this.dataSource = [{doctorsName: 'Dr. Deepak Kumar', speciality: 'Dental', experience: '20 Years', appointmentNo: '15'}, {doctorsName: 'Dr. Deepak', speciality: 'Dental', experience: '18 Years', appointmentNo: '23'}];
+    this.dataSource = [{doctorsName: 'Dr. Deepak Kumar', speciality: 'Dental', experience: '20 Years', appointmentNo: '15', mobile: '8752402147'}, {doctorsName: 'Dr. Deepak', speciality: 'Dental', experience: '18 Years', appointmentNo: '23', mobile: '8752402147'}];
     // this.getAllDoctors();
   }
   @ViewChild(MatSort) sort: MatSort;
@@ -49,6 +51,10 @@ export class DoctorComponent implements OnInit {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
+  }
+
+  route() {
+    this.router.navigate(['doctor-view']);
   }
 
   // getAllDoctors = () => {

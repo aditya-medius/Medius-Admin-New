@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hospitals',
@@ -16,21 +17,22 @@ import Swal from 'sweetalert2';
 })
 export class HospitalsComponent implements OnInit {
 
-  displayedColumns: string[] = ['hospitalName', 'city', 'locality', 'appointmentNo', 'status', 'view'];
+  displayedColumns: string[] = ['hospitalName', 'city', 'mobileNo', 'appointmentNo', 'status', 'view'];
 
   dataSource: any;
 
   constructor(
     private hospitalService: HospitalService,
     private toastrService: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private router: Router
   ) {}
 
   hospitalList: Array<any> | null = null;
 
   ngOnInit(): void {
     // this.getAllHospitals();
-    this.dataSource = [{hospitalName: 'Sanjeevani Hospital', city: 'Delhi', locality: 'Dadar West', appointmentNo: '25'}, {hospitalName: 'Yashoda Hospital', city: 'Mumbai', locality: 'Dadar', appointmentNo: '28'}];
+    this.dataSource = [{hospitalName: 'Sanjeevani Hospital', city: 'Delhi', locality: 'Dadar West', appointmentNo: '25', mobileNo: '87965541023'}, {hospitalName: 'Yashoda Hospital', city: 'Mumbai', locality: 'Dadar', appointmentNo: '28', mobileNo: '87965541023'}];
   }
 
   // getAllHospitals = () => {
@@ -95,4 +97,9 @@ export class HospitalsComponent implements OnInit {
   //     }
   //   })
   // }
+
+  route() {
+    this.router.navigate(['hospital-view']);
+  }
+
 }

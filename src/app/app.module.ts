@@ -36,6 +36,13 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { PatientsComponent } from './patients/patients.component';
+import { SuvidhaKendraComponent } from './suvidha-kendra/suvidha-kendra.component';
+import { HospitalsViewComponent } from './hospitals-view/hospitals-view.component';
+import { DoctorViewComponent } from './doctor-view/doctor-view.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
+import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra-view.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -57,6 +64,11 @@ import { PatientsComponent } from './patients/patients.component';
     CityComponent,
     ImagePipe,
     PatientsComponent,
+    SuvidhaKendraComponent,
+    HospitalsViewComponent,
+    DoctorViewComponent,
+    PatientViewComponent,
+    SuvidhaKendraViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +89,9 @@ import { PatientsComponent } from './patients/patients.component';
     MatCheckboxModule,
     MatCardModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatTabsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],

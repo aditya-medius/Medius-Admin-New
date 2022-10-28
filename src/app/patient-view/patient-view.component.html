@@ -1,0 +1,157 @@
+<div class="start">
+    <h1 style="font-family: Roboto;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 45px;
+    letter-spacing: 0em;
+    text-align: left;
+    ">Patient Profile</h1>
+
+    <div class="row">
+      <div class="col-sm-2 col-lg-1" style="background: #E5E5E5; border-radius: 50px;">
+        <img src="../../assets/user.png" alt="No Image Available" class="hospitalImg" style="width: 100%">
+      </div>
+      <div class="col-sm">
+        <p style="font-family: Roboto;
+        font-size: 25px;
+        font-weight: 400;
+        line-height: 45px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 0;
+        ">Name</p>
+        <p style="font-family: Roboto;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 0;
+        ">Email Id</p>
+        <p style="font-family: Roboto;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin: 0;
+        ">Address</p>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div>
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
+        <li [ngbNavItem]="1" [destroyOnHide]="true">
+          <a ngbNavLink style="color: black;">Detail</a>
+          <ng-template ngbNavContent>
+            <div class="row" style="margin: 1% 0;">
+              <div class="col-sm-4 col-lg-2" style="text-align: end;
+              font-family: Roboto;
+              font-size: 18px;
+              font-weight: 400;
+              line-height: 28px;
+              letter-spacing: 0em;">
+                <p>Name</p>
+                <p>Date Of Birth</p>
+                <p>Mobile</p>
+                <p>Gender</p>
+              </div>
+              <div class="col-sm" style="font-family: Roboto;
+              font-size: 18px;
+              font-weight: 400;
+              line-height: 28px;
+              letter-spacing: 0em;
+              color: #757575;">
+                <p>Name</p>
+                <p>Date Of Birth</p>
+                <p>Mobile</p>
+                <p>Male/Female</p>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink style="color: black;">Appointment History</a>
+          <ng-template ngbNavContent>
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
+            class="mat-elevation-z8">
+        
+            <!-- Patient Name Column -->
+            <ng-container matColumnDef="patientName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Patient Name"
+                style="font-family: 'Roboto'; font-size: 16px;"> Patient Name </th>
+              <td mat-cell *matCellDef="let element"> 
+                <p style="margin: 5% 0 0 0;">{{element.patientName}}</p>
+                <p>{{element.gender}} | {{element.age}}</p>
+                <!-- <p>Male | 32yrs.</p> -->
+              </td>
+            </ng-container>
+        
+            <!-- Booking ID Column -->
+            <ng-container matColumnDef="bookingId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Booking Id"
+                style="font-family: 'Roboto'; font-size: 16px;"> Booking ID </th>
+              <td mat-cell *matCellDef="let element">
+                <p style="margin: 5% 0 0 0;">Booking ID: {{element.bookingId}}</p>
+                <p>Booking Date: {{element.bookingDate}}</p>
+                <!-- {{element.bookingId}}  -->
+              </td>
+            </ng-container>
+        
+            <!-- Doctor Name Column -->
+            <ng-container matColumnDef="doctorDetail">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Doctor Name"
+                style="font-family: 'Roboto'; font-size: 16px;"> Doctor Name </th>
+              <td mat-cell *matCellDef="let element"> 
+                <!-- {{element.doctorDetail}}  -->
+                <p style="margin: 5% 0 0 0; color: #3EBAFF;">{{element.doctorDetail}}</p>
+                <p style="margin: 0;">{{element.specialization}}</p>
+                <p style="margin: 0; color: #3EBAFF;">{{element.hospitalName}}</p>
+              </td>
+            </ng-container>
+        
+            <!-- Appointment Time Column -->
+            <ng-container matColumnDef="appointmentTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Appointment Time"
+                style="font-family: 'Roboto'; font-size: 16px;"> Appointment Time </th>
+              <td mat-cell *matCellDef="let element"> 
+                <!-- {{element.appointmentTime}}  -->
+                <p style="margin: 5% 0 0 0;">{{element.appointmentDate}}</p>
+                <p style="color: #3EBAFF;">{{element.appointmentTime}}</p>
+              </td>
+            </ng-container>
+        
+            <!-- Ammount Column -->
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Ammount"
+                style="font-family: 'Roboto'; font-size: 16px;"> Amount </th>
+              <td mat-cell *matCellDef="let element"> <i class="fa fa-rupee"></i>{{element.amount}} </td>
+            </ng-container>
+        
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Status"
+                style="font-family: 'Roboto'; font-size: 16px;"> Status </th>
+              <td mat-cell *matCellDef="let element"> 
+                <!-- {{element.status}}  -->
+                <p style="margin: 5% 0 0 0; color: #757575; font-weight: 700; font-family: Roboto; font-size: 14px; line-height: 16px; letter-spacing: 0em; text-align: left;">{{element.status1}}</p>
+                <p>{{element.status2}}</p>
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+          </ng-template>
+        </li>
+      </ul>
+      
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      
+      <!-- <pre>Active: {{ active }}</pre> -->
+    </div>
+  </div>
