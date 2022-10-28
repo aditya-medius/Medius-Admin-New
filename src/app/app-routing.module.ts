@@ -17,6 +17,11 @@ import { compileClassMetadata } from '@angular/compiler';
 import { StateComponent } from './state/state.component';
 import { CityComponent } from './city/city.component';
 import { PatientsComponent } from './patients/patients.component';
+import { SuvidhaKendraComponent } from './suvidha-kendra/suvidha-kendra.component';
+import { HospitalsViewComponent } from './hospitals-view/hospitals-view.component';
+import { DoctorViewComponent } from './doctor-view/doctor-view.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
+import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra-view.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -54,6 +59,26 @@ const routes: Routes = [
   {
     path: 'city',
     component: CityComponent,
+  },
+  {
+    path: 'suvidha-kendra',
+    component: SuvidhaKendraComponent,
+  },
+  {
+    path: 'hospital-view',
+    component: HospitalsViewComponent,
+  },
+  {
+    path: 'doctor-view',
+    component: DoctorViewComponent,
+  },
+  {
+    path: 'patient-view',
+    component: PatientViewComponent,
+  },
+  {
+    path: 'suvidha-kendra-view',
+    component: SuvidhaKendraViewComponent,
   },
 ];
 

@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patients',
@@ -14,14 +15,15 @@ import Swal from 'sweetalert2';
 })
 export class PatientsComponent implements OnInit {
 
-  displayedColumns: string[] = ['patientName', 'gender', 'age', 'email', 'mobileNo'];
+  displayedColumns: string[] = ['patientName', 'age', 'gender', 'email', 'mobileNo', 'view'];
 
   dataSource: any;
 
   constructor(
     private doctorService: DoctorService,
     private toastrService: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,4 +50,9 @@ export class PatientsComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+  route() {
+    this.router.navigate(['patient-view']);
+  }
+
 }
