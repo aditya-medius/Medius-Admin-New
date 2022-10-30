@@ -36,8 +36,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { PatientsComponent } from './patients/patients.component';
-import { LoaderComponent } from './Util Component/loader/loader.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SuvidhaKendraComponent } from './suvidha-kendra/suvidha-kendra.component';
+import { HospitalsViewComponent } from './hospitals-view/hospitals-view.component';
+import { DoctorViewComponent } from './doctor-view/doctor-view.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
+import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra-view.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CityComponent,
     ImagePipe,
     PatientsComponent,
-    LoaderComponent,
+    SuvidhaKendraComponent,
+    HospitalsViewComponent,
+    DoctorViewComponent,
+    PatientViewComponent,
+    SuvidhaKendraViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +90,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatCardModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule,
+    MatTabsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],

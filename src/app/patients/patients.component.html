@@ -21,7 +21,14 @@
           style="font-family: 'Roboto'; font-size: 16px;"> Patient Name </th>
         <td mat-cell *matCellDef="let element"> {{element.patientName}} </td>
       </ng-container>
-  
+
+      <!-- Age Column -->
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Age"
+          style="font-family: 'Roboto'; font-size: 16px;"> Age </th>
+        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+      </ng-container>  
+
       <!-- Gender Column -->
       <ng-container matColumnDef="gender">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Gender"
@@ -29,12 +36,7 @@
         <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
       </ng-container>
   
-      <!-- Age Column -->
-      <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Age"
-          style="font-family: 'Roboto'; font-size: 16px;"> Age </th>
-        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-      </ng-container>
+
   
       <!-- Email -->
       <ng-container matColumnDef="email">
@@ -49,7 +51,16 @@
           style="font-family: 'Roboto'; font-size: 16px;"> Mobile No </th>
         <td mat-cell *matCellDef="let element">{{element.mobileNo}}</td>
       </ng-container>
-  
+
+    <!-- View Column -->
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by View"
+        style="font-family: 'Roboto'; font-size: 16px;"> View </th>
+      <td mat-cell *matCellDef="let element">
+        <i class="fa fa-eye" style="cursor: pointer;" (click) = "route()"></i>
+      </td>
+    </ng-container>
+    
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
