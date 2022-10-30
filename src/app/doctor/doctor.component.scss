@@ -38,13 +38,14 @@
 // border-radius: 10px;
 // }
 //::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  //  background-color:white /*replace with your color*/
+//  background-color:white /*replace with your color*/
 //}
 
 //::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-   // background-color: rgb(22, 184, 28);  /*replace with your color*/
+// background-color: rgb(22, 184, 28);  /*replace with your color*/
 //}
 
+@import url("../../utils.scss");
 .start {
   padding: 2% 0;
 }

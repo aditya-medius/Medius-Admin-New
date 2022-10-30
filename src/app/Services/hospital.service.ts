@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { apiUrl } from '../Util/Util';
+import { map } from 'rxjs';
+import { apiUrl, hospitalInterceptor } from '../Util/Util';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,9 @@ export class HospitalService {
   constructor(private http: HttpClient) {}
 
   getAllHospitals = () => {
-    return this.http.get(`${apiUrl}/admin/getAllHospitalList`);
+    return this.http
+      .get(`${apiUrl}/admin/getAllHospitalList`)
+      .pipe(map(hospitalInterceptor));
   };
 
   verifyHospital = (id: string) => {

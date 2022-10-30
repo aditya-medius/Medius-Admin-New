@@ -14,10 +14,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./doctor.component.scss'],
 })
 export class DoctorComponent implements OnInit {
+  displayedColumns: string[] = [
+    'doctorsName',
+    'speciality',
+    'experience',
+    'appointmentNo',
+    'status',
+    'view',
+  ];
 
-  displayedColumns: string[] = ['doctorsName', 'speciality', 'experience', 'appointmentNo', 'status', 'view'];
-
-  dataSource: any;
+  dataSource: any = [];
 
   constructor(
     private doctorService: DoctorService,
@@ -27,8 +33,21 @@ export class DoctorComponent implements OnInit {
 
   // doctorList: Array<any> | null = null;
   ngOnInit(): void {
-    this.dataSource = [{doctorsName: 'Dr. Deepak Kumar', speciality: 'Dental', experience: '20 Years', appointmentNo: '15'}, {doctorsName: 'Dr. Deepak', speciality: 'Dental', experience: '18 Years', appointmentNo: '23'}];
-    // this.getAllDoctors();
+    // this.dataSource = [
+    //   {
+    //     doctorsName: 'Dr. Deepak Kumar',
+    //     speciality: 'Dental',
+    //     experience: '20 Years',
+    //     appointmentNo: '15',
+    //   },
+    //   {
+    //     doctorsName: 'Dr. Deepak',
+    //     speciality: 'Dental',
+    //     experience: '18 Years',
+    //     appointmentNo: '23',
+    //   },
+    // ];
+    this.getAllDoctors();
   }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -51,15 +70,15 @@ export class DoctorComponent implements OnInit {
     }
   }
 
-  // getAllDoctors = () => {
-  //   this.doctorService.getAllDoctorsList().subscribe((result: any) => {
-  //     if (result.status === 200) {
-  //       this.doctorList = result.data;
-  //     } else {
-  //       this.toastrService.error(result.message);
-  //     }
-  //   });
-  // };
+  getAllDoctors = () => {
+    this.doctorService.getAllDoctorsList().subscribe((result: any) => {
+      if (result.status === 200) {
+        this.dataSource = result.data;
+      } else {
+        this.toastrService.error(result.message);
+      }
+    });
+  };
 
   // toggleVerify = (id: string) => {
   //   this.doctorService.verifyDoctor(id).subscribe((result: any) => {

@@ -32,10 +32,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ImagePipe } from './Pipes/image.pipe';
-import {MatCardModule} from '@angular/material/card';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { PatientsComponent } from './patients/patients.component';
+import { LoaderComponent } from './Util Component/loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { PatientsComponent } from './patients/patients.component';
     CityComponent,
     ImagePipe,
     PatientsComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ import { PatientsComponent } from './patients/patients.component';
     MatCheckboxModule,
     MatCardModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

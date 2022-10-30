@@ -15,10 +15,16 @@ import Swal from 'sweetalert2';
   styleUrls: ['./hospitals.component.scss'],
 })
 export class HospitalsComponent implements OnInit {
+  displayedColumns: string[] = [
+    'hospitalName',
+    'city',
+    'locality',
+    'appointmentNo',
+    'status',
+    'view',
+  ];
 
-  displayedColumns: string[] = ['hospitalName', 'city', 'locality', 'appointmentNo', 'status', 'view'];
-
-  dataSource: any;
+  dataSource: any = [];
 
   constructor(
     private hospitalService: HospitalService,
@@ -29,20 +35,34 @@ export class HospitalsComponent implements OnInit {
   hospitalList: Array<any> | null = null;
 
   ngOnInit(): void {
-    // this.getAllHospitals();
-    this.dataSource = [{hospitalName: 'Sanjeevani Hospital', city: 'Delhi', locality: 'Dadar West', appointmentNo: '25'}, {hospitalName: 'Yashoda Hospital', city: 'Mumbai', locality: 'Dadar', appointmentNo: '28'}];
+    // this.dataSource = [
+    //   {
+    //     hospitalName: 'Sanjeevani Hospital',
+    //     city: 'Delhi',
+    //     locality: 'Dadar West',
+    //     appointmentNo: '25',
+    //   },
+    //   {
+    //     hospitalName: 'Yashoda Hospital',
+    //     city: 'Mumbai',
+    //     locality: 'Dadar',
+    //     appointmentNo: '28',
+    //   },
+    // ];
+    this.getAllHospitals();
   }
 
-  // getAllHospitals = () => {
-  //   this.hospitalService.getAllHospitals().subscribe((result: any) => {
-  //     if (result.status === 200) {
-  //       this.hospitalList = result.data;
-  //       this.toastrService.success(result.message);
-  //     } else {
-  //       this.toastrService.error(result.message);
-  //     }
-  //   });
-  // };
+  getAllHospitals = () => {
+    this.hospitalService.getAllHospitals().subscribe((result: any) => {
+      if (result.status === 200) {
+        // this.hospitalList = result.data;
+        this.dataSource = result.data;
+        this.toastrService.success(result.message);
+      } else {
+        this.toastrService.error(result.message);
+      }
+    });
+  };
 
   // toggleVerify = (id: string) => {
   //   this.hospitalService.verifyHospital(id).subscribe((result: any) => {

@@ -6,27 +6,48 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { PatientService } from '../Services/patient.service';
 
 @Component({
   selector: 'app-patients',
   templateUrl: './patients.component.html',
-  styleUrls: ['./patients.component.scss']
+  styleUrls: ['./patients.component.scss'],
 })
 export class PatientsComponent implements OnInit {
+  displayedColumns: string[] = [
+    'patientName',
+    'gender',
+    'age',
+    'email',
+    'mobileNo',
+  ];
 
-  displayedColumns: string[] = ['patientName', 'gender', 'age', 'email', 'mobileNo'];
-
-  dataSource: any;
+  dataSource: any = [];
 
   constructor(
-    private doctorService: DoctorService,
+    private patientService: PatientService,
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer
   ) {}
 
   ngOnInit(): void {
-    this.dataSource = [{patientName: 'Dr. Deepak Kumar', gender: 'Male', age: '20', email: 'test@gmail.com', mobileNo: '8265528510'}, {patientName: 'Dr. Deepak', gender: 'Female', age: '18', email: 'test2@gmail.com', mobileNo: '7265528510'}];
-    // this.getAllDoctors();
+    // this.dataSource = [
+    //   {
+    //     patientName: 'Dr. Deepak Kumar',
+    //     gender: 'Male',
+    //     age: '20',
+    //     email: 'test@gmail.com',
+    //     mobileNo: '8265528510',
+    //   },
+    //   {
+    //     patientName: 'Dr. Deepak',
+    //     gender: 'Female',
+    //     age: '18',
+    //     email: 'test2@gmail.com',
+    //     mobileNo: '7265528510',
+    //   },
+    // ];
+    this.patientService.getAllPatientList();
   }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
