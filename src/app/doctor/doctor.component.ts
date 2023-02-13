@@ -15,14 +15,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./doctor.component.scss'],
 })
 export class DoctorComponent implements OnInit {
-  displayedColumns: string[] = [
-    'doctorsName',
-    'speciality',
-    'experience',
-    'appointmentNo',
-    'status',
-    'view',
-  ];
+  // displayedColumns: string[] = [
+  //   'doctorsName',
+  //   'speciality',
+  //   'experience',
+  //   'appointmentNo',
+  //   'status',
+  //   'view',
+  // ];
 
   displayedColumns: string[] = ['doctorsName', 'speciality', 'experience', 'mobile', 'appointmentNo', 'status', 'view'];
 
@@ -37,26 +37,8 @@ export class DoctorComponent implements OnInit {
 
   // doctorList: Array<any> | null = null;
   ngOnInit(): void {
-<<<<<<< HEAD
-    // this.dataSource = [
-    //   {
-    //     doctorsName: 'Dr. Deepak Kumar',
-    //     speciality: 'Dental',
-    //     experience: '20 Years',
-    //     appointmentNo: '15',
-    //   },
-    //   {
-    //     doctorsName: 'Dr. Deepak',
-    //     speciality: 'Dental',
-    //     experience: '18 Years',
-    //     appointmentNo: '23',
-    //   },
-    // ];
-    this.getAllDoctors();
-=======
     this.dataSource = [{doctorsName: 'Dr. Deepak Kumar', speciality: 'Dental', experience: '20 Years', appointmentNo: '15', mobile: '8752402147'}, {doctorsName: 'Dr. Deepak', speciality: 'Dental', experience: '18 Years', appointmentNo: '23', mobile: '8752402147'}];
     // this.getAllDoctors();
->>>>>>> d3626d2dc118a790fcb5f1a140ba34b69ee5af53
   }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -79,17 +61,6 @@ export class DoctorComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
-  getAllDoctors = () => {
-    this.doctorService.getAllDoctorsList().subscribe((result: any) => {
-      if (result.status === 200) {
-        this.dataSource = result.data;
-      } else {
-        this.toastrService.error(result.message);
-      }
-    });
-  };
-=======
   route() {
     this.router.navigate(['doctor-view']);
   }
@@ -103,7 +74,6 @@ export class DoctorComponent implements OnInit {
   //     }
   //   });
   // };
->>>>>>> d3626d2dc118a790fcb5f1a140ba34b69ee5af53
 
   // toggleVerify = (id: string) => {
   //   this.doctorService.verifyDoctor(id).subscribe((result: any) => {

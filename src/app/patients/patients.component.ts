@@ -6,11 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
-<<<<<<< HEAD
-import { PatientService } from '../Services/patient.service';
-=======
 import { Router } from '@angular/router';
->>>>>>> d3626d2dc118a790fcb5f1a140ba34b69ee5af53
+import { PatientService } from '../Services/patient.service';
 
 @Component({
   selector: 'app-patients',
@@ -18,21 +15,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./patients.component.scss'],
 })
 export class PatientsComponent implements OnInit {
-  displayedColumns: string[] = [
-    'patientName',
-    'gender',
-    'age',
-    'email',
-    'mobileNo',
-  ];
+  // displayedColumns: string[] = [
+  //   'patientName',
+  //   'gender',
+  //   'age',
+  //   'email',
+  //   'mobileNo',
+  // ];
 
-<<<<<<< HEAD
-  dataSource: any = [];
-=======
   displayedColumns: string[] = ['patientName', 'age', 'gender', 'email', 'mobileNo', 'view'];
 
   dataSource: any;
->>>>>>> d3626d2dc118a790fcb5f1a140ba34b69ee5af53
 
   constructor(
     private patientService: PatientService,

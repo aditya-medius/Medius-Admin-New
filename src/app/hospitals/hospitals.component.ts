@@ -16,22 +16,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./hospitals.component.scss'],
 })
 export class HospitalsComponent implements OnInit {
-  displayedColumns: string[] = [
-    'hospitalName',
-    'city',
-    'locality',
-    'appointmentNo',
-    'status',
-    'view',
-  ];
+  // displayedColumns: string[] = [
+  //   'hospitalName',
+  //   'city',
+  //   'locality',
+  //   'appointmentNo',
+  //   'status',
+  //   'view',
+  // ];
 
-<<<<<<< HEAD
-  dataSource: any = [];
-=======
   displayedColumns: string[] = ['hospitalName', 'city', 'mobileNo', 'appointmentNo', 'status', 'view'];
 
   dataSource: any;
->>>>>>> d3626d2dc118a790fcb5f1a140ba34b69ee5af53
 
   constructor(
     private hospitalService: HospitalService,
