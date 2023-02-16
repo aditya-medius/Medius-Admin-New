@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./service.component.scss'],
 })
 export class ServiceComponent implements OnInit, AfterViewInit {
-
   displayedColumns: string[] = ['srno', 'serviceName', 'actions'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
@@ -26,12 +25,12 @@ export class ServiceComponent implements OnInit, AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer
   ) {}
 
-  // speciality: Array<any> | null = null;
-  // serviceName: string | null = null;
+  serviceList: Array<any> | null = null;
+  serviceName: string | null = null;
 
   ngOnInit(): void {
-    this.dataSource = [{srno: '#Q001', serviceName: '24*7 emergency'}, {srno: '#Q002', serviceName: 'New born screening'}, {srno: '#Q003', serviceName: 'Pharmacy'}, {srno: '#Q004', serviceName: 'ICU'}, {srno: '#Q005', serviceName: '24*7 Oxygen'}];
-    // this.getAllServices();
+    this.dataSource = [];
+    this.getAllServices();
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -42,65 +41,84 @@ export class ServiceComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-    /** Announce the change in sort state for assistive technology. */
-    announceSortChange(sortState: Sort) {
-      // This example uses English messages. If your application supports
-      // multiple language, you would internationalize these strings.
-      // Furthermore, you can customize the message to add additional
-      // details about the values being sorted.
-      if (sortState.direction) {
-        this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-      } else {
-        this._liveAnnouncer.announce('Sorting cleared');
+  /** Announce the change in sort state for assistive technology. */
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
+  deleteFunc(_id: string) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.service.deleteService(_id).subscribe((res: any) => {
+          if (res.status !== 400) {
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+            this.getAllServices();
+          }
+        });
       }
-    }
-  
-    deleteFunc() {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
-        }
-      })
-    }
+    });
+  }
 
   // serviceForm = this.fb.group({
   //   name: ['', Validators.required],
   //   serviceType: ['', Validators.required],
   // });
 
-  // getAllServices = () => {
-  //   this.service.getServices().subscribe((result: any) => {
-  //     this.speciality = result.data;
-  //   });
-  // };
+  getAllServices = () => {
+    this.service.getServices().subscribe((result: any) => {
+      this.serviceList = result.data;
+      this.dataSource = this.serviceList.map((e: any, index: Number) => ({
+        _id: e._id,
+        srno: `#Q00${index}`,
+        serviceName: e.name,
+      }));
+    });
+  };
 
   // submitService = () => {
-    // if (!this.serviceForm.valid) {
-    //   this.toastrService.error('Enter proper values');
-    //   return;
-    // }
-    // let { name, serviceType } = this.serviceForm.value;
-    // let type = serviceType ? 'Primary' : 'Secondary';
-    // this.service.addService(name, type).subscribe((result: any) => {
-    //   if (result.status === 400) {
-    //     this.toastrService.error(result.message);
-    //   } else {
-    //     this.toastrService.success(result.message);
-    //     this.serviceForm.reset();
-    //     this.getAllServices();
-    //   }
-    // });
+  // if (!this.serviceForm.valid) {
+  //   this.toastrService.error('Enter proper values');
+  //   return;
+  // }
+  // let { name, serviceType } = this.serviceForm.value;
+  // let type = serviceType ? 'Primary' : 'Secondary';
+  // this.service.addService(name, type).subscribe((result: any) => {
+  // if (result.status === 400) {
+  //   this.toastrService.error(result.message);
+  // } else {
+  //   this.toastrService.success(result.message);
+  //   this.serviceForm.reset();
+  //   this.getAllServices();
+  // }
+  // });
   // };
+
+  submitService = async () => {
+    this.service
+      .addService(this.serviceName, 'Primary')
+      .subscribe((result: any) => {
+        if (result.status === 400) {
+          this.toastrService.error(result.message);
+        } else {
+          this.toastrService.success(result.message);
+          this.getAllServices();
+        }
+      });
+  };
 }

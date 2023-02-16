@@ -158,11 +158,11 @@
   </nav>
   <div class="row">
     <div class="mb-3 col-sm-5">
-      <input type="text" class="form-control" aria-label="Sizing example input"
+      <input type="text" [(ngModel)]="amenityName" class="form-control" aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default" placeholder="Enter Amenity Name">
     </div>
     <div class="col-sm-2">
-      <button type="button" class="btn" style="background: #10847E; color: white;">Submit</button>
+      <button type="button" class="btn" style="background: #10847E; color: white;" (click)="onSubmit()">Submit</button>
     </div>
   </div>
   <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
@@ -213,7 +213,7 @@
           font-weight: 400;
           font-size: 14px;
           line-height: 16px;
-          color: #D31616;" (click)="deleteFunc()"><i class="fa fa-trash-o"></i> &nbsp; Delete</button>
+          color: #D31616;" (click)="deleteFunc(element._id)"><i class="fa fa-trash-o"></i> &nbsp; Delete</button>
       </td>
     </ng-container>
 
@@ -253,7 +253,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" (click)="editAmenity()" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>

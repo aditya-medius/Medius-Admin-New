@@ -7,11 +7,12 @@
 
     <div class="row" style="margin: 0;">
       <div class="col-sm" style="padding: 3% 0;">
-        <select class="form-select" aria-label="Default select example">
+        <select (change)="onEnvChange($event.target.value)"  [value]="localUrl" class="form-select" aria-label="Default select example">
           <!-- <option selected>Open this select menu</option> -->
-          <option value="prod" selected>Production</option>
-          <option value="test">Testing</option>
-          <option value="dev">Development</option>
+          <option value="http://localhost:3000">Local</option>
+          <option value="https://medius-api-prod.azurewebsites.net">Production</option>
+          <option value="https://medius-api-qa.azurewebsites.net">Testing</option>
+          <option value="https://medius-api-dev.azurewebsites.net">Development</option>
         </select>
       </div>
       <div class="col-sm">

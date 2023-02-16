@@ -7,7 +7,15 @@ import { apiUrl, token } from '../Util/Util';
   providedIn: 'root',
 })
 export class ServiceService {
-  constructor(private httpClient: HttpClient) {}
+  private headers: HttpHeaders | null = null;
+  constructor(private httpClient: HttpClient) {
+    const headers = new HttpHeaders({
+      'auth-header': token,
+    });
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Accept', 'application/json');
+    this.headers = headers;
+  }
 
   getAllServices = () => {
     return this.httpClient.get(
@@ -41,5 +49,13 @@ export class ServiceService {
       name,
       serviceType,
     });
+  };
+
+  deleteService = (_id: string) => {
+    return this.httpClient.post(
+      `${apiUrl}/admin/deleteHospitalService/${_id}`,
+      {},
+      { headers: this.headers }
+    );
   };
 }
