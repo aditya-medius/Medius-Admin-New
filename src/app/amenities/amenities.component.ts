@@ -80,7 +80,7 @@ export class AmenitiesComponent implements OnInit, AfterViewInit {
   //   isPrimary: ['', Validators.required],
   // });
 
-  amenitiesArray: Array<any> | null = null;
+  amenitiesArray: Array<any> | null = [];
   // amenityName: string | null = null;
 
   getAllAmenities = () => {

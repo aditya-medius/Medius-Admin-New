@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { apiUrl } from '../Util/Util';
 
 @Component({
   selector: 'app-speciality',
@@ -13,7 +14,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./speciality.component.scss'],
 })
 export class SpecialityComponent implements OnInit, AfterViewInit {
-
   displayedColumns: string[] = ['srno', 'specialityName', 'icons', 'actions'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
@@ -28,8 +28,8 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
   serviceName: string | null = null;
 
   ngOnInit(): void {
-    this.dataSource = [{srno: '#Q001', specialityName: 'Speciality Name' }, {srno: '#Q002', specialityName: 'Speciality Name'}, {srno: '#Q003', specialityName: 'Speciality Name'}, {srno: '#Q004', specialityName: 'Speciality Name'}];
-    // this.getAllServices();
+    this.dataSource = [];
+    this.getAllServices();
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -61,62 +61,73 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
-    })
+    });
   }
 
-  // getAllServices = () => {
-  //   this.service.getAllServices().subscribe((result: any) => {
-  //     this.speciality = result.data['Speciality'];
-  //   });
-  // };
+  getAllServices = () => {
+    this.service.getAllServices().subscribe((result: any) => {
+      this.speciality = result.data['Speciality'].map(
+        (e: any, index: Number) => {
+          console.log(
+            `${apiUrl}/${e.img}?token=${JSON.parse(
+              localStorage.getItem('admin')
+            )}`
+          );
+          return {
+            srno: `#Q00${index}`,
+            ...e,
+            img: `${apiUrl}/${e.img}?token=${JSON.parse(
+              localStorage.getItem('admin')
+            )}`,
+          };
+        }
+      );
+    });
+  };
 
-  // formData: FormData = new FormData();
-  // uploadSpecialization(fileToUpload: any) {
-  //   fileToUpload = fileToUpload[0];
-  //   (this.formData as FormData).append(
-  //     'profileImage',
-  //     fileToUpload,
-  //     fileToUpload.name
-  //   );
-  //   (this.formData as FormData).append('user', 'specializations');
-  // }
+  formData: FormData = new FormData();
+  uploadSpecialization(fileToUpload: any) {
+    fileToUpload = fileToUpload[0];
+    (this.formData as FormData).append(
+      'profileImage',
+      fileToUpload,
+      fileToUpload.name
+    );
+    (this.formData as FormData).append('user', 'specializations');
+  }
 
-  // submitService = () => {
-  //   if (!this.serviceName) {
-  //     this.toastrService.error('Enter a service name');
-  //     return;
-  //   }
-  //   this.service
-  //     .addSpeciality(this.serviceName as string)
-  //     .subscribe((result: any) => {
-  //       if (result.statues === 400) {
-  //         this.toastrService.error(result.message);
-  //       } else {
-  //         this.formData.append('userId', result.data._id);
-  //         this.service
-  //           .uploadServiceImage(this.formData as FormData)
-  //           .subscribe((res: any) => {
-  //             if (res.status === 200) {
-  //               this.getAllServices();
-  //               this.formData.delete('profileImage');
-  //               this.formData.delete('user');
-  //               this.formData.delete('userId');
-  //               this.serviceName = null;
-  //             } else {
-  //               this.toastrService.error('Upload unsuccessful.');
-  //             }
-  //           });
-  //         this.getAllServices();
-  //       }
-  //     });
-  // };
+  submitService = () => {
+    if (!this.serviceName) {
+      this.toastrService.error('Enter a service name');
+      return;
+    }
+    this.service
+      .addSpeciality(this.serviceName as string)
+      .subscribe((result: any) => {
+        if (result.statues === 400) {
+          this.toastrService.error(result.message);
+        } else {
+          this.formData.append('userId', result.data._id);
+          this.service
+            .uploadServiceImage(this.formData as FormData)
+            .subscribe((res: any) => {
+              if (res.status === 200) {
+                this.getAllServices();
+                this.formData.delete('profileImage');
+                this.formData.delete('user');
+                this.formData.delete('userId');
+                this.serviceName = null;
+              } else {
+                this.toastrService.error('Upload unsuccessful.');
+              }
+            });
+          this.getAllServices();
+        }
+      });
+  };
 }
