@@ -23,6 +23,8 @@ export const doctorInterceptor = function (doctorList: any) {
       .join(' ')}`,
     experience: e.overallExperience,
     appointmentNo: '',
+    phoneNumber: e.phoneNumber,
+    id: e._id,
   }));
 
   return { status: doctorList.status, data };

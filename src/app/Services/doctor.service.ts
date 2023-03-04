@@ -12,7 +12,7 @@ export class DoctorService {
   getAllDoctorsList = () => {
     return this.http
       .get(`${apiUrl}/admin/getAllDoctorsList`, { headers: headers })
-      .pipe(map(doctorInterceptor));
+      // .pipe(map(doctorInterceptor));
   };
 
   verifyDoctor = (id: string) => {
