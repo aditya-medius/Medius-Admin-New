@@ -73,15 +73,11 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     this.service.getAllServices().subscribe((result: any) => {
       this.speciality = result.data['Speciality'].map(
         (e: any, index: Number) => {
-          console.log(
-            `${apiUrl}/${e.img}?token=${JSON.parse(
-              localStorage.getItem('admin')
-            )}`
-          );
+          console.log('dsdsdsds', e);
           return {
             srno: `#Q00${index}`,
             ...e,
-            img: `${apiUrl}/${e.img}?token=${JSON.parse(
+            img: `${apiUrl}/${e.image}?token=${JSON.parse(
               localStorage.getItem('admin')
             )}`,
           };
@@ -106,28 +102,40 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
       this.toastrService.error('Enter a service name');
       return;
     }
+    // this.service
+    //   .addSpeciality(this.serviceName as string)
+    //   .subscribe((result: any) => {
+    //     if (result.statues === 400) {
+    //       this.toastrService.error(result.message);
+    //     } else {
+    //       // this.formData.append('userId', result.data._id);
+    //     }
+    //   });
     this.service
-      .addSpeciality(this.serviceName as string)
-      .subscribe((result: any) => {
-        if (result.statues === 400) {
-          this.toastrService.error(result.message);
-        } else {
-          this.formData.append('userId', result.data._id);
+      .uploadServiceImage(this.formData as FormData)
+      .subscribe((res: any) => {
+        let {
+          response: { image },
+        } = res.data;
+        if (res.status === 200) {
+          this.getAllServices();
+          this.formData.delete('profileImage');
+          this.formData.delete('user');
+          // this.formData.delete('userId');
+          // this.serviceName = null;
           this.service
-            .uploadServiceImage(this.formData as FormData)
-            .subscribe((res: any) => {
-              if (res.status === 200) {
-                this.getAllServices();
-                this.formData.delete('profileImage');
-                this.formData.delete('user');
-                this.formData.delete('userId');
-                this.serviceName = null;
+            .addSpeciality(this.serviceName as string, image)
+            .subscribe((result: any) => {
+              if (result.statues === 400) {
+                this.toastrService.error(result.message);
               } else {
-                this.toastrService.error('Upload unsuccessful.');
+                // this.formData.append('userId', result.data._id);
               }
             });
-          this.getAllServices();
+        } else {
+          this.toastrService.error('Upload unsuccessful.');
         }
       });
+    this.getAllServices();
   };
 }

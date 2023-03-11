@@ -12,7 +12,7 @@ export class HospitalService {
   getAllHospitals = () => {
     return this.http
       .get(`${apiUrl}/admin/getAllHospitalList`)
-      .pipe(map(hospitalInterceptor));
+      // .pipe(map(hospitalInterceptor));
   };
 
   verifyHospital = (id: string) => {

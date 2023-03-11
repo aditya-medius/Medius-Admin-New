@@ -277,7 +277,11 @@ Table of appointsment
           View
         </th>
         <td mat-cell *matCellDef="let element">
-          <i class="fa fa-eye" style="cursor: pointer" (click)="route()"></i>
+          <i
+            class="fa fa-eye"
+            style="cursor: pointer"
+            (click)="route(element.id)"
+          ></i>
         </td>
       </ng-container>
 

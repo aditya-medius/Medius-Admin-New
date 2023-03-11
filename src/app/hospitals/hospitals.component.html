@@ -148,79 +148,124 @@ Table of appointsment
     </mat-paginator> -->
 
   <!-- <div class="mat-elevation-z8"> -->
-  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
-    class="mat-elevation-z8">
-
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8"
+  >
     <!-- Hospital Name -->
     <ng-container matColumnDef="hospitalName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Hospital Name"
-        style="font-family: 'Roboto'; font-size: 16px;"> Hospital Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.hospitalName}} </td>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Hospital Name"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Hospital Name
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.hospitalName }}</td>
     </ng-container>
 
     <!-- City Column -->
     <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by City"
-        style="font-family: 'Roboto'; font-size: 16px;"> City & Locality </th>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by City"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        City & Locality
+      </th>
       <td mat-cell *matCellDef="let element">
-        <p style="margin: 5% 0 0 0;">{{element.city}}</p>
-        <p>{{element.locality}}</p>
+        <p style="margin: 5% 0 0 0">{{ element.city }}</p>
+        <p>{{ element.locality }}</p>
         <!-- {{element.city}} -->
       </td>
     </ng-container>
 
     <!-- Mobile No. Column -->
     <ng-container matColumnDef="mobileNo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Mobile No."
-        style="font-family: 'Roboto'; font-size: 16px;"> Mobile No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Mobile No."
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Mobile No.
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.mobileNo }}</td>
     </ng-container>
 
-      <!-- Locality Column -->
-      <ng-container matColumnDef="locality">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          sortActionDescription="Sort by Locality"
-          style="font-family: 'Roboto'; font-size: 16px"
-        >
-          Locality
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.locality }}</td>
-      </ng-container>
+    <!-- Locality Column -->
+    <ng-container matColumnDef="locality">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Locality"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Locality
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.locality }}</td>
+    </ng-container>
 
-      <!-- No. Of Appointment -->
-      <ng-container matColumnDef="appointmentNo">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          sortActionDescription="Sort by No. Of Appointment"
-          style="font-family: 'Roboto'; font-size: 16px"
-        >
-          No. Of Appointment
-        </th>
-        <td mat-cell *matCellDef="let element">{{ element.appointmentNo }}</td>
-      </ng-container>
+    <!-- No. Of Appointment -->
+    <!-- <ng-container matColumnDef="appointmentNo">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by No. Of Appointment"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        No. Of Appointment
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.appointmentNo }}</td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="status">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Status"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Status
+      </th>
+      <!-- <td mat-cell *matCellDef="let element"> {{element.actions}} </td> -->
+      <td mat-cell *matCellDef="let element">
+        <mat-slide-toggle
+          [checked]="element.verified"
+          (change)="toggleVerify(element.id)"
+        ></mat-slide-toggle>
+      </td>
+    </ng-container>
 
     <!-- View Column -->
     <ng-container matColumnDef="view">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by View"
-        style="font-family: 'Roboto'; font-size: 16px;"> View </th>
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by View"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        View
+      </th>
       <td mat-cell *matCellDef="let element">
-        <i class="fa fa-eye" style="cursor: pointer;" (click) = "route()"></i>
+        <i class="fa fa-eye" style="cursor: pointer" (click)="route()"></i>
       </td>
-    </ng-container>e',
-    //   'city',
-    //   'locality',
-    //   'appointmentNo',
-    //   'status',
-    //   'view',
-    // ];
+    </ng-container>
 
-      <!-- View Column -->
-      <ng-container matColumnDef="view">
+    <!-- View Column -->
+    <!-- <ng-container matColumnDef="view">
         <th
           mat-header-cell
           *matHeaderCellDef
@@ -233,17 +278,17 @@ Table of appointsment
         <td mat-cell *matCellDef="let element">
           <i class="fa fa-eye"></i>
         </td>
-      </ng-container>
+      </ng-container> -->
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements"
-    >
-    </mat-paginator>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
   <!-- </ng-container> -->
   <ng-container *ngIf="!dataSource.length">
     <app-loader class="center"></app-loader>

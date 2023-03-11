@@ -29,9 +29,9 @@ export class DoctorComponent implements OnInit {
     'speciality',
     'experience',
     'mobile',
-    'appointmentNo',
+    // 'appointmentNo',
     'status',
-    'view',
+    // 'view',
   ];
 
   dataSource: any;
@@ -69,8 +69,8 @@ export class DoctorComponent implements OnInit {
     }
   }
 
-  route() {
-    this.router.navigate(['doctor-view']);
+  route(id: string) {
+    this.router.navigate([`doctor-view/${id}`]);
   }
 
   getAllDoctors = () => {

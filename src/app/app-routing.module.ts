@@ -69,7 +69,7 @@ const routes: Routes = [
     component: HospitalsViewComponent,
   },
   {
-    path: 'doctor-view',
+    path: 'doctor-view/:id',
     component: DoctorViewComponent,
   },
   {

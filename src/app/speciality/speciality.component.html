@@ -222,7 +222,7 @@
     <ng-container matColumnDef="icons">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by icon"
         style="font-family: 'Roboto'; font-size: 16px;"> Icons </th>
-      <td mat-cell *matCellDef="let element"> <img [src]="img" style="width: 35px;"> </td>
+      <td mat-cell *matCellDef="let element"> <img [src]="element.img" style="width: 35px;"> </td>
     </ng-container>
 
     <!-- Actions Column -->

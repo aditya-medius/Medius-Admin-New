@@ -25,7 +25,14 @@ export class HospitalsComponent implements OnInit {
   //   'view',
   // ];
 
-  displayedColumns: string[] = ['hospitalName', 'city', 'mobileNo', 'appointmentNo', 'status', 'view'];
+  displayedColumns: string[] = [
+    'hospitalName',
+    'city',
+    'mobileNo',
+    // 'appointmentNo',
+    'status',
+    // 'view',
+  ];
 
   dataSource: any;
 
@@ -40,14 +47,32 @@ export class HospitalsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getAllHospitals();
-    this.dataSource = [{hospitalName: 'Sanjeevani Hospital', city: 'Delhi', locality: 'Dadar West', appointmentNo: '25', mobileNo: '87965541023'}, {hospitalName: 'Yashoda Hospital', city: 'Mumbai', locality: 'Dadar', appointmentNo: '28', mobileNo: '87965541023'}];
+    this.dataSource = [
+      {
+        hospitalName: 'Sanjeevani Hospital',
+        city: 'Delhi',
+        locality: 'Dadar West',
+        // appointmentNo: '25',
+        mobileNo: '87965541023',
+        verified: true,
+      },
+    ];
+    this.getAllHospitals();
   }
 
   getAllHospitals = () => {
     this.hospitalService.getAllHospitals().subscribe((result: any) => {
       if (result.status === 200) {
         // this.hospitalList = result.data;
-        this.dataSource = result.data;
+        this.dataSource = result.data.map((e: any) => ({
+          hospitalName: e.name,
+          city: e?.address?.city?.name,
+          locality: e?.address?.locality?.name,
+          // appointmentNo: '',
+          mobileNo: e.contactNumber,
+          verified: e.verified,
+          id: e._id,
+        }));
         this.toastrService.success(result.message);
       } else {
         this.toastrService.error(result.message);
@@ -55,16 +80,16 @@ export class HospitalsComponent implements OnInit {
     });
   };
 
-  // toggleVerify = (id: string) => {
-  //   this.hospitalService.verifyHospital(id).subscribe((result: any) => {
-  //     if (result.status === 200) {
-  //       this.toastrService.success(result.message);
-  //       this.getAllHospitals();
-  //     } else {
-  //       this.toastrService.error(result.message);
-  //     }
-  //   });
-  // };
+  toggleVerify = (id: string) => {
+    this.hospitalService.verifyHospital(id).subscribe((result: any) => {
+      if (result.status === 200) {
+        this.toastrService.success(result.message);
+        this.getAllHospitals();
+      } else {
+        this.toastrService.error(result.message);
+      }
+    });
+  };
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -110,5 +135,4 @@ export class HospitalsComponent implements OnInit {
   route() {
     this.router.navigate(['hospital-view']);
   }
-
 }
