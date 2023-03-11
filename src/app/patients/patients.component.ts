@@ -8,6 +8,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { PatientService } from '../Services/patient.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-patients',
@@ -23,9 +24,16 @@ export class PatientsComponent implements OnInit {
   //   'mobileNo',
   // ];
 
-  displayedColumns: string[] = ['patientName', 'age', 'gender', 'email', 'mobileNo', 'view'];
+  displayedColumns: string[] = [
+    'patientName',
+    'age',
+    'gender',
+    'email',
+    'mobileNo',
+    // 'view',
+  ];
 
-  dataSource: any;
+  dataSource: any = [];
 
   constructor(
     private patientService: PatientService,
@@ -35,23 +43,23 @@ export class PatientsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.dataSource = [
-    //   {
-    //     patientName: 'Dr. Deepak Kumar',
-    //     gender: 'Male',
-    //     age: '20',
-    //     email: 'test@gmail.com',
-    //     mobileNo: '8265528510',
-    //   },
-    //   {
-    //     patientName: 'Dr. Deepak',
-    //     gender: 'Female',
-    //     age: '18',
-    //     email: 'test2@gmail.com',
-    //     mobileNo: '7265528510',
-    //   },
-    // ];
-    this.patientService.getAllPatientList();
+    this.dataSource = [
+      {
+        patientName: 'Dr. Deepak Kumar',
+        gender: 'Male',
+        age: '20',
+        email: 'test@gmail.com',
+        mobileNo: '8265528510',
+      },
+      {
+        patientName: 'Dr. Deepak',
+        gender: 'Female',
+        age: '18',
+        email: 'test2@gmail.com',
+        mobileNo: '7265528510',
+      },
+    ];
+    this.getPatientList();
   }
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -78,4 +86,20 @@ export class PatientsComponent implements OnInit {
     this.router.navigate(['patient-view']);
   }
 
+  getPatientList = () => {
+    this.patientService.getAllPatientList().subscribe((result: any) => {
+      if (result.status === 200) {
+        this.dataSource = result.data.map((e: any) => ({
+          patientName: `${e.firstName} ${e.lastName}`,
+          gender: e.gender,
+          age: moment(e.DOB).fromNow().split(' ').slice(0, 2).join(' '),
+          email: e.email,
+          mobileNo: e.phoneNumber,
+        }));
+        this.toastrService.success(result.message);
+      } else {
+        this.toastrService.error(result.message);
+      }
+    });
+  };
 }

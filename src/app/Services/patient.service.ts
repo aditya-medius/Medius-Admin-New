@@ -10,7 +10,6 @@ export class PatientService {
   constructor(private http: HttpClient) {}
 
   getAllPatientList = () => {
-    console.log(':Aditya', this.http);
     return this.http.get(`${apiUrl}/admin/getAllPatientList`);
   };
 }
