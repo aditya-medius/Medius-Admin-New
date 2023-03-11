@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { StateService } from '../Services/state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-state',
@@ -11,15 +13,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./state.component.scss'],
 })
 export class StateComponent implements OnInit, AfterViewInit {
-
   displayedColumns: string[] = ['srno', 'stateName', 'actions'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
-  
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+
+  stateName: string | null = null;
+
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    private stateService: StateService,
+    private toasterService: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.dataSource = [{srno: '#Q001', stateName: 'Delhi'}, {srno: '#Q002', stateName: 'UP'}, {srno: '#Q003', stateName: 'Assam'}, {srno: '#Q004', stateName: 'Punjab'}];
+    this.dataSource = [];
+    this.getAllStates();
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -51,17 +59,34 @@ export class StateComponent implements OnInit, AfterViewInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
-    })
+    });
   }
 
-  // submitState = () => {};
+  getAllStates = () => {
+    this.stateService.getCityStateLocalityCountry().subscribe((result: any) => {
+      if (result.status === 200) {
+        this.dataSource = result?.data.state?.map((e: any, index: Number) => {
+          return {
+            srno: `#Q00${index}`,
+            stateName: e?.name,
+          };
+        });
+        console.log('lh dndsdsd', result);
+      }
+    });
+  };
+
+  submitState = () => {
+    this.stateService.addState(this.stateName).subscribe((result: any) => {
+      if (result.status === 200) {
+        this.toasterService.success(result.message);
+        this.getAllStates();
+      }
+    });
+  };
 }
