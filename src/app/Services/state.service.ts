@@ -19,9 +19,24 @@ export class StateService {
     );
   };
 
-  getCityStateLocalityCountry = () => {
-    return this.http.get(`${apiUrl}/admin/getCityStateLocalityCountry`, {
-      headers,
-    });
+  addCity = (city_state: string, name: string) => {
+    return this.http.post(
+      `${apiUrl}/admin/city`,
+      { city_state, name },
+      {
+        headers,
+      }
+    );
+  };
+
+  getCityStateLocalityCountry = (region: string | null = null) => {
+    return this.http.get(
+      `${apiUrl}/admin/getCityStateLocalityCountry?${
+        region && `region=${region}`
+      }`,
+      {
+        headers,
+      }
+    );
   };
 }
