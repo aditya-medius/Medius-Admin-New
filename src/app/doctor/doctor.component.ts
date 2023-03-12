@@ -31,7 +31,7 @@ export class DoctorComponent implements OnInit {
     'mobile',
     // 'appointmentNo',
     'status',
-    // 'view',
+    'view',
   ];
 
   dataSource: any;

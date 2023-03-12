@@ -31,7 +31,7 @@ export class HospitalsComponent implements OnInit {
     'mobileNo',
     // 'appointmentNo',
     'status',
-    // 'view',
+    'view',
   ];
 
   dataSource: any;
