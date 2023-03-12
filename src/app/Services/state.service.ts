@@ -29,11 +29,40 @@ export class StateService {
     );
   };
 
-  getCityStateLocalityCountry = (region: string | null = null) => {
+  addLocality = (locality_city: string, name: string = '') => {
+    return this.http.post(
+      `${apiUrl}/admin/locality`,
+      {
+        locality_city,
+        name,
+      },
+      {
+        headers,
+      }
+    );
+  };
+
+  getCityStateLocalityCountry = (
+    region: string | null = null,
+    page: Number = 0,
+    limit: Number = 20
+  ) => {
     return this.http.get(
       `${apiUrl}/admin/getCityStateLocalityCountry?${
-        region && `region=${region}`
+        region && `region=${region}&page=${page}&limit=${limit}`
       }`,
+      {
+        headers,
+      }
+    );
+  };
+
+  getCityByState = (stateId: string = '') => {
+    return this.http.post(
+      `${apiUrl}/admin/getCityByState`,
+      {
+        state: stateId,
+      },
       {
         headers,
       }
