@@ -37,15 +37,15 @@ export class SuvidhaKendraComponent implements OnInit {
   // doctorList: Array<any> | null = null;
   ngOnInit(): void {
     this.dataSource = [
-      {
-        name: 'Dr. Deepak Kumar',
-        contact: '8754213690',
-        mail: 'test@gmail.com',
-        city: 'Delhi',
-        locality: 'test abc',
-        address: 'New Delhi',
-        pin: '208931',
-      },
+      // {
+      //   name: 'Dr. Deepak Kumar',
+      //   contact: '8754213690',
+      //   mail: 'test@gmail.com',
+      //   city: 'Delhi',
+      //   locality: 'test abc',
+      //   address: 'New Delhi',
+      //   pin: '208931',
+      // },
     ];
     this.getAllSuvidhaUsers();
   }

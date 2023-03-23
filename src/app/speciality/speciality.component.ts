@@ -7,6 +7,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { apiUrl } from '../Util/Util';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-speciality',
@@ -73,7 +74,6 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     this.service.getAllServices().subscribe((result: any) => {
       this.speciality = result.data['Speciality'].map(
         (e: any, index: Number) => {
-          console.log('dsdsdsds', e);
           return {
             srno: `#Q00${index}`,
             ...e,
@@ -88,6 +88,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
 
   formData: FormData = new FormData();
   uploadSpecialization(fileToUpload: any) {
+    console.log('Ovgdsgshbgdsg dsds');
     fileToUpload = fileToUpload[0];
     (this.formData as FormData).append(
       'profileImage',
@@ -136,6 +137,83 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
           this.toastrService.error('Upload unsuccessful.');
         }
       });
+    this.getAllServices();
+  };
+
+  specialityToBeEdited: string = '';
+  editSpeciality = (id: string) => {
+    this.specialityToBeEdited = id;
+  };
+
+  updateSpeciality = async () => {
+    // this.service.updateSpeciality();
+    console.log(':dshfcdsddssd', this.formData.get('profileImage'));
+
+    if (!this.serviceName) {
+      this.toastrService.error('Enter a service name');
+      return;
+    }
+    let newImage: string = '';
+    if (this.formData.get('profileImage')) {
+      let res: any = await lastValueFrom(
+        this.service.uploadServiceImage(this.formData as FormData)
+      );
+
+      if (res.status === 200) {
+        let {
+          response: { image },
+        } = res.data;
+
+        newImage = image;
+      }
+    }
+
+    this.formData.delete('profileImage');
+    this.formData.delete('user');
+    this.service
+      .updateSpeciality(
+        this.specialityToBeEdited,
+        newImage,
+        this.serviceName as string
+      )
+      .subscribe((result: any) => {
+        if (result.statues === 400) {
+          this.toastrService.error(result.message);
+        } else {
+          // this.formData.append('userId', result.data._id);
+        }
+      });
+
+    this.getAllServices();
+    // this.service
+    //   .uploadServiceImage(this.formData as FormData)
+    //   .subscribe((res: any) => {
+    //     let {
+    //       response: { image },
+    //     } = res.data;
+    //     if (res.status === 200) {
+    //       this.getAllServices();
+    //       this.formData.delete('profileImage');
+    //       this.formData.delete('user');
+    //       // this.formData.delete('userId');
+    //       // this.serviceName = null;
+    //       this.service
+    //         .updateSpeciality(
+    //           this.specialityToBeEdited,
+    //           this.serviceName as string,
+    //           image
+    //         )
+    //         .subscribe((result: any) => {
+    //           if (result.statues === 400) {
+    //             this.toastrService.error(result.message);
+    //           } else {
+    //             // this.formData.append('userId', result.data._id);
+    //           }
+    //         });
+    //     } else {
+    //       this.toastrService.error('Upload unsuccessful.');
+    //     }
+    //   });
     this.getAllServices();
   };
 }

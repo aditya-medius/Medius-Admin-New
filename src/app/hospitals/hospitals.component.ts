@@ -48,14 +48,14 @@ export class HospitalsComponent implements OnInit {
   ngOnInit(): void {
     // this.getAllHospitals();
     this.dataSource = [
-      {
-        hospitalName: 'Sanjeevani Hospital',
-        city: 'Delhi',
-        locality: 'Dadar West',
-        // appointmentNo: '25',
-        mobileNo: '87965541023',
-        verified: true,
-      },
+      // {
+      //   hospitalName: 'Sanjeevani Hospital',
+      //   city: 'Delhi',
+      //   locality: 'Dadar West',
+      //   // appointmentNo: '25',
+      //   mobileNo: '87965541023',
+      //   verified: true,
+      // },
     ];
     this.getAllHospitals();
   }

@@ -59,4 +59,16 @@ export class ServiceService {
       { headers: this.headers }
     );
   };
+
+  updateSpeciality = (specialityId: string, image: string, name: string) => {
+    return this.httpClient.post(
+      `${apiUrl}/admin/editSpeciality`,
+      {
+        specialityId,
+        image,
+        name,
+      },
+      { headers: this.headers }
+    );
+  };
 }

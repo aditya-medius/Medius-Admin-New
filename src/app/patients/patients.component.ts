@@ -30,7 +30,7 @@ export class PatientsComponent implements OnInit {
     'gender',
     'email',
     'mobileNo',
-    // 'view',
+    'view',
   ];
 
   dataSource: any = [];
@@ -44,20 +44,20 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = [
-      {
-        patientName: 'Dr. Deepak Kumar',
-        gender: 'Male',
-        age: '20',
-        email: 'test@gmail.com',
-        mobileNo: '8265528510',
-      },
-      {
-        patientName: 'Dr. Deepak',
-        gender: 'Female',
-        age: '18',
-        email: 'test2@gmail.com',
-        mobileNo: '7265528510',
-      },
+      // {
+      //   patientName: 'Dr. Deepak Kumar',
+      //   gender: 'Male',
+      //   age: '20',
+      //   email: 'test@gmail.com',
+      //   mobileNo: '8265528510',
+      // },
+      // {
+      //   patientName: 'Dr. Deepak',
+      //   gender: 'Female',
+      //   age: '18',
+      //   email: 'test2@gmail.com',
+      //   mobileNo: '7265528510',
+      // },
     ];
     this.getPatientList();
   }
