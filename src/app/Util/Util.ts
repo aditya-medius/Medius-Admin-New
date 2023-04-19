@@ -2,11 +2,13 @@ import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 export const apiUrl = localStorage.getItem('apiUrl') ?? environment.apiUrl;
-export const token = JSON.parse(localStorage.getItem('admin') as string)
-  ? JSON.parse(localStorage.getItem('admin') as string).data
-  : null;
+// export const token = JSON.parse(localStorage.getItem('admin') as string)
+//   ? JSON.parse(localStorage.getItem('admin') as string).data
+//   : null;
 
-console.log("L:kbhjgbibhjdssd'< tok", token);
+export const token =
+  (JSON.parse(localStorage.getItem('admin')) as string) ?? null;
+
 export const headers = new HttpHeaders({
   'auth-header': token ?? '',
 });
@@ -21,6 +23,8 @@ export const doctorInterceptor = function (doctorList: any) {
       .join(' ')}`,
     experience: e.overallExperience,
     appointmentNo: '',
+    phoneNumber: e.phoneNumber,
+    id: e._id,
   }));
 
   return { status: doctorList.status, data };
@@ -39,7 +43,6 @@ export const hospitalInterceptor = function (hospitalList: any) {
 };
 
 export const patientInterceptor = (patientList: any) => {
-  console.log(':lkjbhjnjhbnjbhknjkbh sd', patientList);
   let { data }: { data: Array<any> } = patientList;
 
   data = data.map((e: any) => ({}));

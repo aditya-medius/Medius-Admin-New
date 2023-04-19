@@ -57,7 +57,9 @@
         style="font-family: 'Roboto'; font-size: 16px;"> Actions </th>
       <!-- <td mat-cell *matCellDef="let element"> {{element.actions}} </td> -->
       <td mat-cell *matCellDef="let element">
-        <button type="button" class="btn btn-success btn-sm" style="background: rgb(61 173 21 / 0.3);
+        <button
+        (click)="setNewFeeId(element.id, element.feename, element.amount)"
+         type="button" class="btn btn-success btn-sm" style="background: rgb(61 173 21 / 0.3);
               margin: 1%;
               height: 50px;
               width: 92px;
@@ -109,7 +111,7 @@
             font-weight: 400;
             font-size: 17px;
             line-height: 30px; color: #757575;">Fee Name</label>
-            <input type="text" class="form-control" style="margin: 2% 0;" name="FeeName" id="FeeName">
+            <input type="text" [(ngModel)]="newFeeName" class="form-control" style="margin: 2% 0;" name="FeeName" id="FeeName">
           </div>
           <div class="col-sm">
             <label for="" style="font-family: 'Roboto';
@@ -117,14 +119,14 @@
             font-weight: 400;
             font-size: 17px;
             line-height: 30px; color: #757575;" >Amount</label>
-            <input type="number" class="form-control" name="Amount" style="margin: 2% 0;" id="Amount">
+            <input type="number" [(ngModel)]="newFeeAmount" class="form-control" name="Amount" style="margin: 2% 0;" id="Amount">
           </div>
         </div>
         <!-- <p>Edit Modal body text goes here.</p> -->
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-primary">Save</button>
+        <button (click)="editFee()" type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>

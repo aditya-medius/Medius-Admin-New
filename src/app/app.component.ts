@@ -10,25 +10,32 @@ import { apiUrl } from './Util/Util';
 })
 export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private toastrService: ToastrService) {
-    // this.login();
+    this.login();
   }
   title = 'Angular-App';
 
   ngOnInit(): void {
     // this.login();
   }
-  // login = () => {
-  //   let url: string = `${apiUrl}/admin/login?phoneNumber=8826332442&password=123456`;
-  //   return this.http.put(url, {}).subscribe((result: any) => {
-  //     if (result.status == 200) {
-  //       this.toastrService.success(`${result.message}`);
-  //       localStorage.setItem('admin', JSON.stringify(result));
-  //     } else if (result.status == 400) {
-  //       if (result.type == 'JsonWebTokenError') {
-  //         this.toastrService.error('Invalid OTP');
-  //       }
-  //       this.toastrService.error(result.message);
-  //     }
-  //   });
-  // };
+
+  onEnvChange = (url: string) => {
+    localStorage.setItem('apiUrl', url);
+    window.location.reload();
+  };
+
+  public localUrl: string = apiUrl;
+  login = () => {
+    let url: string = `${apiUrl}/admin/login?phoneNumber=8826332442&password=123456`;
+    return this.http.put(url, {}).subscribe((result: any) => {
+      if (result.status == 200) {
+        this.toastrService.success(`${result.message}`);
+        localStorage.setItem('admin', JSON.stringify(result.data));
+      } else if (result.status == 400) {
+        if (result.type == 'JsonWebTokenError') {
+          this.toastrService.error('Invalid OTP');
+        }
+        this.toastrService.error(result.message);
+      }
+    });
+  };
 }

@@ -10,12 +10,25 @@ export class DoctorService {
   constructor(private http: HttpClient) {}
 
   getAllDoctorsList = () => {
-    return this.http
-      .get(`${apiUrl}/admin/getAllDoctorsList`, { headers: headers })
-      .pipe(map(doctorInterceptor));
+    return this.http.get(`${apiUrl}/admin/getAllDoctorsList`, {
+      headers: headers,
+    });
+    // .pipe(map(doctorInterceptor));
   };
 
   verifyDoctor = (id: string) => {
     return this.http.put(`${apiUrl}/admin/verifyDoctors/${id}`, {});
+  };
+
+  getDoctorById = (id: string) => {
+    return this.http.post(
+      `${apiUrl}/doctor/getDoctorById/${id}`,
+      {
+        fullDetails: 1,
+      },
+      {
+        headers: headers,
+      }
+    );
   };
 }

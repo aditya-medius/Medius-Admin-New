@@ -41,8 +41,9 @@ import { HospitalsViewComponent } from './hospitals-view/hospitals-view.componen
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
 import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra-view.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DoctorViewComponent,
     PatientViewComponent,
     SuvidhaKendraViewComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +93,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatPaginatorModule,
     MatSortModule,
     MatTabsModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

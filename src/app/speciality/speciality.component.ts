@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { apiUrl } from '../Util/Util';
+import { lastValueFrom } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-speciality',
@@ -13,7 +16,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./speciality.component.scss'],
 })
 export class SpecialityComponent implements OnInit, AfterViewInit {
-
   displayedColumns: string[] = ['srno', 'specialityName', 'icons', 'actions'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
@@ -21,15 +23,16 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
   constructor(
     private service: ServiceService,
     private toastrService: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private dom: DomSanitizer
   ) {}
 
   speciality: Array<any> | null = null;
   serviceName: string | null = null;
 
   ngOnInit(): void {
-    this.dataSource = [{srno: '#Q001', specialityName: 'Speciality Name' }, {srno: '#Q002', specialityName: 'Speciality Name'}, {srno: '#Q003', specialityName: 'Speciality Name'}, {srno: '#Q004', specialityName: 'Speciality Name'}];
-    // this.getAllServices();
+    this.dataSource = [];
+    this.getAllServices();
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -61,62 +64,164 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
-    })
+    });
   }
 
-  // getAllServices = () => {
-  //   this.service.getAllServices().subscribe((result: any) => {
-  //     this.speciality = result.data['Speciality'];
-  //   });
-  // };
+  getAllServices = () => {
+    this.service.getAllServices().subscribe((result: any) => {
+      this.speciality = result.data['Speciality'].map(
+        (e: any, index: Number) => {
+          console.log(
+            'image',
+            `${apiUrl}/${e.image}?token=${JSON.parse(
+              localStorage.getItem('admin')
+            )}`
+          );
+          return {
+            srno: `#Q00${index}`,
+            ...e,
+            img: `${apiUrl}/${e.image}?token=${JSON.parse(
+              localStorage.getItem('admin')
+            )}`,
+          };
+        }
+      );
+    });
+  };
 
-  // formData: FormData = new FormData();
-  // uploadSpecialization(fileToUpload: any) {
-  //   fileToUpload = fileToUpload[0];
-  //   (this.formData as FormData).append(
-  //     'profileImage',
-  //     fileToUpload,
-  //     fileToUpload.name
-  //   );
-  //   (this.formData as FormData).append('user', 'specializations');
-  // }
+  formData: FormData = new FormData();
+  uploadSpecialization(fileToUpload: any) {
+    console.log('Ovgdsgshbgdsg dsds');
+    fileToUpload = fileToUpload[0];
+    (this.formData as FormData).append(
+      'profileImage',
+      fileToUpload,
+      fileToUpload.name
+    );
+    (this.formData as FormData).append('user', 'specializations');
+  }
 
-  // submitService = () => {
-  //   if (!this.serviceName) {
-  //     this.toastrService.error('Enter a service name');
-  //     return;
-  //   }
-  //   this.service
-  //     .addSpeciality(this.serviceName as string)
-  //     .subscribe((result: any) => {
-  //       if (result.statues === 400) {
-  //         this.toastrService.error(result.message);
-  //       } else {
-  //         this.formData.append('userId', result.data._id);
-  //         this.service
-  //           .uploadServiceImage(this.formData as FormData)
-  //           .subscribe((res: any) => {
-  //             if (res.status === 200) {
-  //               this.getAllServices();
-  //               this.formData.delete('profileImage');
-  //               this.formData.delete('user');
-  //               this.formData.delete('userId');
-  //               this.serviceName = null;
-  //             } else {
-  //               this.toastrService.error('Upload unsuccessful.');
-  //             }
-  //           });
-  //         this.getAllServices();
-  //       }
-  //     });
-  // };
+  submitService = () => {
+    if (!this.serviceName) {
+      this.toastrService.error('Enter a service name');
+      return;
+    }
+    // this.service
+    //   .addSpeciality(this.serviceName as string)
+    //   .subscribe((result: any) => {
+    //     if (result.statues === 400) {
+    //       this.toastrService.error(result.message);
+    //     } else {
+    //       // this.formData.append('userId', result.data._id);
+    //     }
+    //   });
+    this.service
+      .uploadServiceImage(this.formData as FormData)
+      .subscribe((res: any) => {
+        let {
+          response: { image },
+        } = res.data;
+        if (res.status === 200) {
+          this.getAllServices();
+          this.formData.delete('profileImage');
+          this.formData.delete('user');
+          // this.formData.delete('userId');
+          // this.serviceName = null;
+          this.service
+            .addSpeciality(this.serviceName as string, image)
+            .subscribe((result: any) => {
+              if (result.statues === 400) {
+                this.toastrService.error(result.message);
+              } else {
+                // this.formData.append('userId', result.data._id);
+              }
+            });
+        } else {
+          this.toastrService.error('Upload unsuccessful.');
+        }
+      });
+    this.getAllServices();
+  };
+
+  specialityToBeEdited: string = '';
+  editSpeciality = (id: string) => {
+    this.specialityToBeEdited = id;
+  };
+
+  updateSpeciality = async () => {
+    // this.service.updateSpeciality();
+    console.log(':dshfcdsddssd', this.formData.get('profileImage'));
+
+    if (!this.serviceName) {
+      this.toastrService.error('Enter a service name');
+      return;
+    }
+    let newImage: string = '';
+    if (this.formData.get('profileImage')) {
+      let res: any = await lastValueFrom(
+        this.service.uploadServiceImage(this.formData as FormData)
+      );
+
+      if (res.status === 200) {
+        let {
+          response: { image },
+        } = res.data;
+
+        newImage = image;
+      }
+    }
+
+    this.formData.delete('profileImage');
+    this.formData.delete('user');
+    this.service
+      .updateSpeciality(
+        this.specialityToBeEdited,
+        newImage,
+        this.serviceName as string
+      )
+      .subscribe((result: any) => {
+        if (result.statues === 400) {
+          this.toastrService.error(result.message);
+        } else {
+          // this.formData.append('userId', result.data._id);
+        }
+      });
+
+    this.getAllServices();
+    // this.service
+    //   .uploadServiceImage(this.formData as FormData)
+    //   .subscribe((res: any) => {
+    //     let {
+    //       response: { image },
+    //     } = res.data;
+    //     if (res.status === 200) {
+    //       this.getAllServices();
+    //       this.formData.delete('profileImage');
+    //       this.formData.delete('user');
+    //       // this.formData.delete('userId');
+    //       // this.serviceName = null;
+    //       this.service
+    //         .updateSpeciality(
+    //           this.specialityToBeEdited,
+    //           this.serviceName as string,
+    //           image
+    //         )
+    //         .subscribe((result: any) => {
+    //           if (result.statues === 400) {
+    //             this.toastrService.error(result.message);
+    //           } else {
+    //             // this.formData.append('userId', result.data._id);
+    //           }
+    //         });
+    //     } else {
+    //       this.toastrService.error('Upload unsuccessful.');
+    //     }
+    //   });
+    this.getAllServices();
+  };
 }

@@ -4,23 +4,30 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { OwnershipService } from '../Services/ownership.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ownership',
   templateUrl: './ownership.component.html',
-  styleUrls: ['./ownership.component.scss']
+  styleUrls: ['./ownership.component.scss'],
 })
 export class OwnershipComponent implements OnInit, AfterViewInit {
-
-  displayedColumns: string[] = ['srno', 'qualification', 'actions'];
+  displayedColumns: string[] = ['srno', 'ownership', 'actions'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
-  
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    private ownershipService: OwnershipService,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.dataSource = [{srno: '#Q001', qualification: 'Public'}, {srno: '#Q002', qualification: 'Private'}, {srno: '#Q003', qualification: 'Private'}, {srno: '#Q004', qualification: 'Public'}];
+    this.getAllOwnershipTypes();
   }
+
+  ownershipType: string | null = null;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,7 +50,7 @@ export class OwnershipComponent implements OnInit, AfterViewInit {
     }
   }
 
-  deleteFunc() {
+  deleteFunc(id: string) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -51,16 +58,43 @@ export class OwnershipComponent implements OnInit, AfterViewInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        this.deleteOwnership(id).subscribe((result: any) => {
+          if (result.status === 200) {
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+            this.getAllOwnershipTypes();
+          }
+        });
       }
-    })
+    });
   }
 
+  getAllOwnershipTypes = async () => {
+    this.ownershipService.getAllOwnership().subscribe((result: any) => {
+      if (result.status === 200) {
+        this.dataSource = result.data.map((e: any, index: Number) => ({
+          id: e._id,
+          ownership: e.owner,
+          srno: index,
+        }));
+      }
+    });
+  };
+
+  submitOwnershipType = () => {
+    this.ownershipService
+      .addOwnership({ owner: this.ownershipType })
+      .subscribe((result: any) => {
+        if (result.status === 200) {
+          this.toastrService.success(result.message);
+          this.getAllOwnershipTypes();
+        }
+      });
+  };
+
+  deleteOwnership = (id: string) => {
+    return this.ownershipService.deleteOwnership(id);
+  };
 }

@@ -22,8 +22,15 @@ import { HospitalsViewComponent } from './hospitals-view/hospitals-view.componen
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
 import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra-view.component';
+import { LoginComponent } from './login/login';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   canActivate: [AuthGuard],
+  // },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
 
   { path: 'appointment', component: AppointmentComponent },
@@ -65,11 +72,11 @@ const routes: Routes = [
     component: SuvidhaKendraComponent,
   },
   {
-    path: 'hospital-view',
+    path: 'hospital-view/:id',
     component: HospitalsViewComponent,
   },
   {
-    path: 'doctor-view',
+    path: 'doctor-view/:id',
     component: DoctorViewComponent,
   },
   {

@@ -26,4 +26,10 @@ export class AmenitiesService {
       }
     );
   };
+
+  deleteAmenity = (amenityId: string) => {
+    return this.httpClient.get(`${apiUrl}/admin/deleteAnemities/${amenityId}`, {
+      headers,
+    });
+  };
 }

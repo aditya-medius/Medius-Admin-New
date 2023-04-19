@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { QualificationService } from '../Services/qualification.service';
 
@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-qualification',
@@ -16,21 +17,25 @@ import Swal from 'sweetalert2';
   styleUrls: ['./qualification.component.scss'],
 })
 export class QualificationComponent implements OnInit {
-
-  displayedColumns: string[] = ['srno', 'qualification', 'abbreviation', 'actions'];
+  displayedColumns: string[] = [
+    'srno',
+    'qualification',
+    'abbreviation',
+    'actions',
+  ];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
 
   constructor(
     private qualificationService: QualificationService,
-    // private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer
   ) {}
 
-  ngOnInit(): void {
-    this.dataSource = [{srno: '#Q001', qualification: 'Bachelor Of Medicine And Bachelor Of Surgery', abbreviation: 'MBBS'}, {srno: '#Q002', qualification: 'Bachelor Of Dental Surgery ', abbreviation: 'BDS'}, {srno: '#Q003', qualification: 'Bachelor Of Homeopathy Medicine And Surgery ', abbreviation: 'BHMS'}, {srno: '#Q004', qualification: 'PublBachelor Orf Ayurvedic Medicine And Surgeryic', abbreviation: 'BAMS'}];
-  }
+  // ngOnInit(): void {
+  //   this.dataSource = [{srno: '#Q001', qualification: 'Bachelor Of Medicine And Bachelor Of Surgery', abbreviation: 'MBBS'}, {srno: '#Q002', qualification: 'Bachelor Of Dental Surgery ', abbreviation: 'BDS'}, {srno: '#Q003', qualification: 'Bachelor Of Homeopathy Medicine And Surgery ', abbreviation: 'BHMS'}, {srno: '#Q004', qualification: 'PublBachelor Orf Ayurvedic Medicine And Surgeryic', abbreviation: 'BAMS'}];
+  // }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -53,7 +58,7 @@ export class QualificationComponent implements OnInit {
     }
   }
 
-  deleteFunc() {
+  deleteFunc(id: string) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -61,49 +66,60 @@ export class QualificationComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        this.deleteQualification(id);
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
       }
-    })
+    });
   }
 
-  // qualificationForm = this.fb.group({
-  //   name: ['', Validators.required],
-  //   abbreviation: ['', Validators.required],
-  // });
+  qualificationForm = this.fb.group({
+    name: ['', Validators.required],
+    abbreviation: ['', Validators.required],
+  });
 
-  // qualifications: Array<any> | null = null;
-  // ngOnInit(): void {
-  //   this.getQualification();
-  // }
+  qualifications: Array<any> | null = null;
+  ngOnInit(): void {
+    this.getQualification();
+  }
 
-  // getQualification = () => {
-  //   this.qualificationService
-  //     .getQualificationList()
-  //     .subscribe((result: any) => {
-  //       this.qualifications = result.data;
-  //     });
-  // };
+  getQualification = () => {
+    this.qualificationService
+      .getQualificationList()
+      .subscribe((result: any) => {
+        this.qualifications = result.data.map((e: any, index: Number) => {
+          return {
+            srno: index,
+            qualification: e.name,
+            abbreviation: e.abbreviation,
+            id: e._id,
+          };
+        });
+      });
+  };
 
-  // submitQualification = () => {
-  //   if (!this.qualificationForm.valid) {
-  //     this.toastrService.error('Enter proper values');
-  //     return;
-  //   }
+  submitQualification = () => {
+    if (!this.qualificationForm.valid) {
+      this.toastrService.error('Enter proper values');
+      return;
+    }
+    let { name, abbreviation } = this.qualificationForm.value;
+    this.qualificationService
+      .addQualification(name, abbreviation)
+      .subscribe((result: any) => {
+        this.getQualification();
+        this.toastrService.success(result.message);
+        this.qualificationForm.reset();
+      });
+  };
 
-  //   let { name, abbreviation } = this.qualificationForm.value;
-  //   this.qualificationService
-  //     .addQualification(name, abbreviation)
-  //     .subscribe((result: any) => {
-  //       this.getQualification();
-  //       this.toastrService.success(result.message);
-  //       this.qualificationForm.reset();
-  //     });
-  // };
+  deleteQualification = (id: string) => {
+    this.qualificationService
+      .deleteQualification(id)
+      .subscribe((result: any) => {
+        this.getQualification();
+      });
+  };
 }
