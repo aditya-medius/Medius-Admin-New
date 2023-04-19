@@ -270,7 +270,10 @@
         Icons
       </th>
       <td mat-cell *matCellDef="let element">
-        <img [src]="element.img" style="width: 35px" />
+        <img
+          [src]="dom.bypassSecurityTrustUrl(element.img)"
+          style="width: 35px"
+        />
       </td>
     </ng-container>
 

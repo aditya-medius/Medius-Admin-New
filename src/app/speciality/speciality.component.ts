@@ -8,6 +8,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { apiUrl } from '../Util/Util';
 import { lastValueFrom } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-speciality',
@@ -22,7 +23,8 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
   constructor(
     private service: ServiceService,
     private toastrService: ToastrService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private dom: DomSanitizer
   ) {}
 
   speciality: Array<any> | null = null;
@@ -74,6 +76,12 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     this.service.getAllServices().subscribe((result: any) => {
       this.speciality = result.data['Speciality'].map(
         (e: any, index: Number) => {
+          console.log(
+            'image',
+            `${apiUrl}/${e.image}?token=${JSON.parse(
+              localStorage.getItem('admin')
+            )}`
+          );
           return {
             srno: `#Q00${index}`,
             ...e,

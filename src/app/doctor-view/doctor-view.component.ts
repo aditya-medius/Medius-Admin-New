@@ -115,9 +115,25 @@ export class DoctorViewComponent implements OnInit {
     }
   }
 
+  doctorData: null | any = null;
   getDoctorById = (id: string) => {
     this.doctorService.getDoctorById(id).subscribe((result: any) => {
-      console.log(';hdsddssdd', result);
+      console.log(';hdsddssdd', result.data);
+      if (result.status === 200) {
+        let data = result.data;
+        this.doctorData = {
+          ...data,
+          name: `${data.firstName} ${data.lastName}`,
+          specialization: data.specialization.map((e: any) => e.specialityName),
+          qualification: data.qualification.map(
+            (e: any) => e.qualificationName.abbreviation
+          ),
+          institution: data.qualification.map(
+            (e: any) => e.certificationOrganisation
+          ),
+        };
+        console.log('sdddsd', this.doctorData);
+      }
     });
   };
 }

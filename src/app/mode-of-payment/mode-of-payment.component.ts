@@ -5,6 +5,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { ModeOfPaymentService } from '../Services/modeofPayment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mode-of-payment',
@@ -18,7 +19,8 @@ export class ModeOfPaymentComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private modeOfPaymentService: ModeOfPaymentService
+    private modeOfPaymentService: ModeOfPaymentService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -75,9 +77,38 @@ export class ModeOfPaymentComponent implements OnInit, AfterViewInit {
           srno: index,
           feename: e.name,
           amount: e.feeAmount,
+          id: e._id,
         }));
       }
     });
+  };
+
+  newFeeName: string = '';
+  newFeeAmount: Number = 0;
+  newFeeId: string = '';
+
+  setNewFeeId = (id: string, name: string, amount: Number) => {
+    this.newFeeId = id;
+    this.newFeeName = name;
+    this.newFeeAmount = amount;
+  };
+
+  editFee = () => {
+    console.log(':jdhdsndsd', this.newFeeAmount);
+    if (!(this.newFeeAmount || this.newFeeId || this.newFeeName)) {
+      this.toastrService.error('Enter proper values');
+      return;
+    }
+    console.log(':udsfdsv', this.newFeeAmount);
+    this.modeOfPaymentService
+      .editFee(this.newFeeId, this.newFeeName, this.newFeeAmount)
+      .subscribe((result: any) => {
+        console.log('rvddd', result);
+        if (result.status === 200) {
+          this.toastrService.success('Sucess');
+          this.getAllFees();
+        }
+      });
   };
 }
 

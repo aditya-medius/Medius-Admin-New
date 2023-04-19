@@ -21,8 +21,14 @@ export class DoctorService {
   };
 
   getDoctorById = (id: string) => {
-    return this.http.get(`${apiUrl}/doctor/getDoctorById/${id}`, {
-      headers: headers,
-    });
+    return this.http.post(
+      `${apiUrl}/doctor/getDoctorById/${id}`,
+      {
+        fullDetails: 1,
+      },
+      {
+        headers: headers,
+      }
+    );
   };
 }

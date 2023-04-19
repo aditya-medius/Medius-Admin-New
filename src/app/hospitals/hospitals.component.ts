@@ -132,7 +132,7 @@ export class HospitalsComponent implements OnInit {
   //   })
   // }
 
-  route() {
-    this.router.navigate(['hospital-view']);
+  route(id: string) {
+    this.router.navigate([`hospital-view/${id}`]);
   }
 }
