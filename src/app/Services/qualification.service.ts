@@ -23,4 +23,14 @@ export class QualificationService {
       }
     );
   };
+
+  deleteQualification = (id: string) => {
+    return this.httpClient.post(
+      `${apiUrl}/admin/deleteQualification/${id}`,
+      {},
+      {
+        headers: headers,
+      }
+    );
+  };
 }

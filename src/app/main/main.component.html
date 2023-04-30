@@ -1,44 +1,81 @@
 <!-- <nav class="navbar navbar-light bg-light" style="padding: 0.5% 2%; background: -webkit-linear-gradient(rgb(75 78 213 / 40%), rgb(233 41 118 / 40%) ,rgb(31 130 31 / 40%));"> -->
-<nav class="navbar navbar-light" style="padding: 0.5% 2% 0 2%; background: white;">
-
-  <img src="../assets/Medius-Logo.png" alt="Preview Not Available" class="medLogo">
+  <nav
+  class="navbar navbar-light"
+  style="padding: 0.5% 2% 0 2%; background: white"
+>
+  <img
+    src="../assets/Medius-Logo.png"
+    alt="Preview Not Available"
+    class="medLogo"
+  />
 
   <form class="d-flex" class="formWidth">
-
-    <div class="row" style="margin: 0;">
-      <div class="col-sm" style="padding: 3% 0;">
-        <select class="form-select" aria-label="Default select example">
+    <div class="row" style="margin: 0">
+      <div class="col-sm" style="padding: 3% 0">
+        <select
+          (change)="onEnvChange($event.target.value)"
+          [value]="localUrl"
+          class="form-select"
+          aria-label="Default select example"
+        >
           <!-- <option selected>Open this select menu</option> -->
-          <option value="prod" selected>Production</option>
-          <option value="test">Testing</option>
-          <option value="dev">Development</option>
+          <option value="http://localhost:3000">Local</option>
+          <option
+            value=" http://medius-prod-2097867460.us-east-2.elb.amazonaws.com"
+          >
+            Production
+          </option>
+          <option value="http://3.141.91.35:3000">Testing</option>
+          <option value="http://3.18.254.171:3000">Development</option>
         </select>
       </div>
       <div class="col-sm">
-        <div class="row" style="margin: 0; float: right;">
+        <div class="row" style="margin: 0; float: right">
           <div class="col-sm-5">
             <div class="dot">M</div>
           </div>
           <div class="col-sm">
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                style="background: white; color: #757575; border: 0; font-size: 30px;">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="
+                  background: white;
+                  color: #757575;
+                  border: 0;
+                  font-size: 30px;
+                "
+              >
                 <!-- Dropdown button -->
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="margin: 23% -200%;">
-                <li style="padding: 3% 0;"><a class="dropdown-item" style="background: #E8F3F3;">
-                    <div class="row" style="margin: 0;">
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuButton1"
+                style="margin: 23% -200%"
+              >
+                <li style="padding: 3% 0">
+                  <a class="dropdown-item" style="background: #e8f3f3">
+                    <div class="row" style="margin: 0">
                       <div class="logResize">M</div>
-                      <div class="col-sm" style="margin: auto;">
-                        <p style="margin: 0;">Abhishek Singh</p>
-                        <p style="margin: 0;">Admin</p>
+                      <div class="col-sm" style="margin: auto">
+                        <p style="margin: 0">Abhishek Singh</p>
+                        <p style="margin: 0">Admin</p>
                       </div>
                     </div>
-                  </a></li>
-                <li style="padding: 3% 0; border-bottom: 1px solid black;"><a class="dropdown-item">My Profile</a></li>
-                <li style="padding: 3% 0; border-bottom: 1px solid black;"><a class="dropdown-item">Setting</a></li>
-                <li style="padding: 3% 0;"><a class="dropdown-item">Log Out</a></li>
+                  </a>
+                </li>
+                <li style="padding: 3% 0; border-bottom: 1px solid black">
+                  <a class="dropdown-item">My Profile</a>
+                </li>
+                <li style="padding: 3% 0; border-bottom: 1px solid black">
+                  <a class="dropdown-item">Setting</a>
+                </li>
+                <li style="padding: 3% 0">
+                  <a class="dropdown-item">Log Out</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -68,15 +105,12 @@
         <option value="logout">Log Out</option>
       </select>
     </div> -->
-
   </form>
-
 </nav>
 
 <!-- <div class="v1"></div>
 <div class="v2"></div>
 <div class="v3"></div> -->
-
 
 <!-- <div class="header">
     <h1 class="logo">MEDIUS</h1>
@@ -92,325 +126,27 @@
         border-style: none;
         width: 600px; font-size: 20px;" >
         </div>
-      </form>
+      </form>AuthGuard
       </div>
 </div> -->
 
-<div class="row" style="margin: 0;">
+<div class="row" style="margin: 0">
   <!-- <div class="col-sm">
     hi
   </div>
   <div class="col-sm">
     Hello
   </div> -->
-  <div class="col-lg-2 col-md-4 col-sm-4" style="border-top: 1px solid #00000036;">
-    <!-- <app-sidenav></app-sidenav> -->
-    <div class="sidebar">
-      <h5>Main</h5>
-      <a
-        [routerLink]="['dashboard']"
-        id="dashboard"
-        (click) = "getSelectedIcon('dashboard')"
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-        ><i class="fa fa-fw fa-home" style="width: 27px; height: 22.41px"></i>
-        Dashboard</a
-      >
-      <hr style="margin: 2%; color: white; opacity: 1" />
-      <a
-        routerLink="/main/appointment"
-        id="appointment"
-        (click) = "getSelectedIcon('appointment')"
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-        ><i class="fa fa-fw fa-calendar" style="width: 27px; height: 22.41px"></i>
-        Appointment</a
-      >
-      <a
-        routerLink="/main/hospital"
-        id="hospital"
-        (click) = "getSelectedIcon('hospital')"
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-        ><i class="fa fa-fw fa-bed" style="width: 27px; height: 22.41px"></i>
-        Hospitals</a
-      >
-      <a
-        routerLink="/main/doctor"
-        id="doctor"
-        (click) = "getSelectedIcon('doctor')"
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-        ><i class="fa fa-fw fa-user-md" style="width: 27px; height: 22.41px"></i>
-        Doctors</a
-      >
-      <a
-        routerLink="/main/patients"
-        id="user"
-        (click) = "getSelectedIcon('user')"
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-        ><i class="fa fa-fw fa-user" style="width: 27px; height: 22.41px"></i>
-        Patients</a
-      >
-      <a
-      routerLink="/main/suvidha-kendra"
-      id="suvidha-kendra"
-      (click) = "getSelectedIcon('suvidha-kendra')"
-      style="
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 21px;
-        letter-spacing: 0.05em;
-        color: #ffffff;
-      "
-      ><i class="fa fa-fw fa-user" style="width: 27px; height: 22.41px"></i>
-      Suvidha Kendra</a
-    >
-      <hr style="margin: 2%; color: white; opacity: 1" />
-      <a
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-      >
-        <i
-          class="fa fa-check-square"
-          aria-hidden="true"
-          style="width: 27px; height: 22.41px"
-        ></i>
-        Essentials
-      </a>
-      <ul class="feat-show" type="none">
-        <li>
-          <a
-            routerLink="/main/services"
-            id="services"
-            (click) = "getSelectedIcon('services')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 17px;
-              line-height: 20px;
-              letter-spacing: 0.05em;
-              color: #ffffff;
-            "
-            ><i class="fa fa-briefcase" aria-hidden="true"></i> Services</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/main/amenities"
-            id="amenities"
-            (click) = "getSelectedIcon('amenities')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 17px;
-              line-height: 20px;
-              letter-spacing: 0.05em;
-              color: #ffffff;
-            "
-            ><i
-              class="fa fa-circle-o-notch"
-              aria-hidden="true"
-              style="margin: 0 1%"
-            ></i
-            >Amenities</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/main/speciality"
-            id="speciality"
-            (click) = "getSelectedIcon('speciality')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 17px;
-              line-height: 20px;
-              letter-spacing: 0.05em;
-              color: #ffffff;
-            "
-            ><i class="fa fa-stethoscope" style="margin: 0 1%"></i> Speciality</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/main/qualification"
-            id="qualification"
-            (click) = "getSelectedIcon('qualification')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 17px;
-              line-height: 20px;
-              letter-spacing: 0.05em;
-              color: #ffffff;
-            "
-            ><i class="fa fa-fw fa-graduation-cap" style="margin: 0 1%"></i
-            >Qualification</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/main/Ownership"
-            id="Ownership"
-            (click) = "getSelectedIcon('Ownership')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 17px;
-              line-height: 20px;
-              letter-spacing: 0.05em;
-              color: #ffffff;
-            "
-            ><i class="fa fa-university" style="margin: 0 1%"></i> Ownership Type</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/main/payment"
-            id="payment"
-            (click) = "getSelectedIcon('payment')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 17px;
-              line-height: 20px;
-              letter-spacing: 0.05em;
-              color: #ffffff;
-            "
-            ><i class="fa fa-rupee" style="margin: 0 1%"></i> Convenience Fee</a
-          >
-        </li>
-      </ul>
-      <hr style="margin: 2%; color: white; opacity: 1" />
-      <a
-        style="
-          font-family: 'Roboto';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #ffffff;
-        "
-        ><i class="fa fa-fw fa-globe" style="width: 27px; height: 22.41px"></i
-        >Location Details
-      </a>
-      <ul class="show" type="none">
-        <li>
-          <a
-          routerLink="/main/state"
-          id="state"
-          (click) = "getSelectedIcon('state')"
-          style="font-family: 'Roboto'; font-style: normal;
-          font-weight: 300;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #f8f9fa;"
-            ><i
-              class="fa fa-map-marker"
-              style="
-                margin: 0 1%
-              "
-            ></i>
-            State</a
-          >
-        </li>
-        <li>
-          <a
-          routerLink="/main/city"
-          id="city"
-          (click) = "getSelectedIcon('city')"
-          style="font-family: 'Roboto'; font-style: normal;
-          font-weight: 300;
-          font-size: 18px;
-          line-height: 21px;
-          letter-spacing: 0.05em;
-          color: #f8f9fa;"
-            ><i
-              class="fa fa-building"
-              style="
-                margin: 0 1%
-              "
-            ></i>
-            City</a
-          >
-        </li>
-        <li>
-          <a
-            routerLink="/main/location"
-            id="location"
-            (click) = "getSelectedIcon('location')"
-            style="
-              font-family: 'Roboto';
-              font-style: normal;
-              font-weight: 300;
-              font-size: 18px;
-              line-height: 21px;
-              letter-spacing: 0.05em;
-              color: #f8f9fa;
-            "
-            ><i class="fa fa-crosshairs" style="margin: 0 1%"></i> Locality</a
-          >
-        </li>
-      </ul>
-      <!-- <a routerLink="/payment"><i class="fa fa-fw fa-credit-card"></i>Mode of Payment</a> -->
-    </div>
+  <div
+    class="col-lg-2 col-md-4 col-sm-4"
+    style="border-top: 1px solid #00000036"
+  >
+    <app-sidenav></app-sidenav>
   </div>
-  <div class="col-lg col-md col-sm" style="border-top: 1px solid #00000036;
-  overflow: scroll;">
+  <div
+    class="col-lg col-md col-sm"
+    style="border-top: 1px solid #00000036; overflow: scroll"
+  >
     <router-outlet></router-outlet>
   </div>
 </div>

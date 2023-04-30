@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { apiUrl } from '../Util/Util';
 
 declare interface RouteInfo {
   path: string;
@@ -82,7 +86,9 @@ export class MainComponent implements OnInit {
   public menuItems: any[] = [];
   public isCollapsed = true;
   selected: any;
-  constructor(private router:Router) { }
+  constructor(private router:Router, private http: HttpClient, private toastrService: ToastrService) { 
+    this.login();
+  }
 
 
   ngOnInit(): void {
@@ -119,5 +125,26 @@ export class MainComponent implements OnInit {
     document.getElementById(data).style.background = 'white';
     console.log(data);
   }
+
+  onEnvChange = (url: string) => {
+    localStorage.setItem('apiUrl', url);
+    window.location.reload();
+  };
+
+  public localUrl: string = apiUrl;
+  login = () => {
+    let url: string = `${apiUrl}/admin/login?phoneNumber=8826332442&password=123456`;
+    return this.http.put(url, {}).subscribe((result: any) => {
+      if (result.status == 200) {
+        this.toastrService.success(`${result.message}`);
+        localStorage.setItem('admin', JSON.stringify(result.data));
+      } else if (result.status == 400) {
+        if (result.type == 'JsonWebTokenError') {
+          this.toastrService.error('Invalid OTP');
+        }
+        this.toastrService.error(result.message);
+      }
+    });
+  };
 
 }

@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { apiUrl } from './Util/Util';
 
 @Component({
@@ -9,7 +7,7 @@ import { apiUrl } from './Util/Util';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {
+  constructor() {
     // this.login();
   }
   title = 'Angular-App';
@@ -17,12 +15,19 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // this.login();
   }
+
+  // onEnvChange = (url: string) => {
+  //   localStorage.setItem('apiUrl', url);
+  //   window.location.reload();
+  // };
+
+  // public localUrl: string = apiUrl;
   // login = () => {
   //   let url: string = `${apiUrl}/admin/login?phoneNumber=8826332442&password=123456`;
   //   return this.http.put(url, {}).subscribe((result: any) => {
   //     if (result.status == 200) {
   //       this.toastrService.success(`${result.message}`);
-  //       localStorage.setItem('admin', JSON.stringify(result));
+  //       localStorage.setItem('admin', JSON.stringify(result.data));
   //     } else if (result.status == 400) {
   //       if (result.type == 'JsonWebTokenError') {
   //         this.toastrService.error('Invalid OTP');
