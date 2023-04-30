@@ -1,0 +1,438 @@
+<!-- <div class="content">
+  <p>Essentials<span style="color: rgb(186, 185, 185)">/qualification</span></p>
+</div>
+<h1 class="app">Quaification</h1> -->
+
+<!--input field-->
+<!-- <div class="custom"> -->
+<!-- <form [formGroup]="qualificationForm">
+  <input
+    type="text"
+    placeholder="Enter Qualification Name"
+    formControlName="name"
+    style="
+      background-color: rgb(248, 246, 246);
+      height: 40px;
+      width: 40%;
+      margin-left: 20px;
+      border-style: none;
+      padding: 15px;
+      font-style: italic;
+      border: 1px solid rgb(175, 173, 173);
+    "
+  />
+
+  <input
+    type="text"
+    placeholder="Enter Abbreviation"
+    formControlName="abbreviation"
+    style="
+      background-color: rgb(248, 246, 246);
+      height: 40px;
+      width: 30%;
+      border-style: none;
+      margin-left: 20px;
+      padding: 15px;
+      font-style: italic;
+      border: 1px solid rgb(175, 173, 173);
+    "
+  />
+
+  submit button style
+  <a
+    class="btn btn-success"
+    style="
+      background-color: #10847e;
+      color: white;
+      width: 20%;
+      margin-left: 20px;
+    "
+    (click)="submitQualification()"
+    >Submit</a
+  >
+</form> -->
+<!-- </div> -->
+
+<!--table of service-->
+<!-- <table class="table align-middle mb-0 bg-white">
+  <thead class="bg-white">
+    <tr>
+      <th style="color: #a7a4a4">
+        Show<button
+          style="
+            border-radius: 5px;
+            background: #ffffff;
+            border: 0.5px solid #10847e;
+            box-sizing: border-box;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 15px;
+          "
+        >
+          05
+          <i class="fa fa-sort" style="color: blue"></i></button
+        >entries
+      </th>
+    </tr>
+    <tr>
+      <th>
+        Sr. No.
+        <i
+          class="fa fa-arrow-down"
+          style="color: rgb(199, 194, 194); margin-left: 10px"
+        ></i>
+        <i class="fa fa-arrow-up" style="color: rgb(199, 194, 194)"></i>
+      </th>
+
+      <th>
+        Qualification
+        <i
+          class="fa fa-arrow-down"
+          style="color: rgb(199, 194, 194); margin-left: 10px"
+        ></i>
+        <i class="fa fa-arrow-up" style="color: rgb(199, 194, 194)"></i>
+      </th>
+
+      <th>
+        Abbreviation
+        <i
+          class="fa fa-arrow-down"
+          style="color: rgb(199, 194, 194); margin-left: 10px"
+        ></i>
+        <i class="fa fa-arrow-up" style="color: rgb(199, 194, 194)"></i>
+      </th>
+
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="qualifications">
+      <tr *ngFor="let data of qualifications; let index = index">
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-normal mb-1">#00{{ index }}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">
+            {{ data.name }}
+          </p>
+        </td>
+        <td>{{ data.abbreviation }}</td>
+        <td>
+          <a
+            class="btn btn-success"
+            style="background-color: #7fed99; color: green"
+            href="#!"
+            role="button"
+          >
+            <i class="fa fa-pencil me-2"></i>Edit</a
+          >
+          &nbsp;&nbsp;
+          <a
+            class="btn btn-danger"
+            style="background-color: #fd866e; color: red"
+            href="#!"
+            role="button"
+          >
+            <i class="fa fa-trash me-2"></i>Delete</a
+          >
+        </td>
+      </tr>
+    </ng-container>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="color: rgb(114, 111, 111); font-size: 17px">
+        Previous<span>
+          <button
+            style="
+              background-color: #10847e;
+
+              color: white;
+              border-style: none;
+              margin-left: 10px;
+              margin-right: 10px;
+              padding: 10px 20px;
+            "
+          >
+            1
+          </button></span
+        >Next
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<div class="start">
+  <h1 style="color: grey; font-weight: 500; font-size: 30px">Qualification</h1>
+  <nav aria-label="breadcrumb" style="font-size: 21px; font-weight: 500">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <!-- <a href="#"> -->
+        Essentials
+        <!-- </a> -->
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Qualification</li>
+    </ol>
+  </nav>
+  <form [formGroup]="qualificationForm">
+    <div class="row">
+      <div class="mb-3 col-lg-5 col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Enter Qualification"
+          formControlName="name"
+        />
+      </div>
+      <div class="mb-3 col-lg-3 col-sm-4">
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          placeholder="Enter Abbreviation"
+          formControlName="abbreviation"
+        />
+      </div>
+      <div class="col-sm-2">
+        <button
+          type="button"
+          class="btn"
+          style="background: #10847e; color: white"
+          (click)="submitQualification()"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+  <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+    </mat-paginator> -->
+
+  <!-- <div class="mat-elevation-z8"> -->
+  <table
+    mat-table
+    [dataSource]="qualifications"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8"
+  >
+    <!-- SR. No. Column -->
+    <ng-container matColumnDef="srno">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Serial Number"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Sr. No.
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.srno }}</td>
+    </ng-container>
+
+    <!-- Qualification Column -->
+    <ng-container matColumnDef="qualification">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by Qualification"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Qualification
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.qualification }}</td>
+    </ng-container>
+
+    <!-- Abbreviation Column -->
+    <ng-container matColumnDef="abbreviation">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by abbreviation"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Abbreviation
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.abbreviation }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by symbol"
+        style="font-family: 'Roboto'; font-size: 16px"
+      >
+        Actions
+      </th>
+      <!-- <td mat-cell *matCellDef="let element"> {{element.actions}} </td> -->
+      <td mat-cell *matCellDef="let element">
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          style="
+            background: rgb(61 173 21 / 0.3);
+            margin: 1%;
+            height: 50px;
+            width: 92px;
+            border-radius: 5px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            color: #3dad15;
+          "
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          <i class="fa fa-pencil"></i> &nbsp; Edit
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          style="
+            background: rgba(211, 22, 22, 0.28);
+            border-radius: 5px;
+            width: 92px;
+            height: 50px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            color: #d31616;
+          "
+          (click)="deleteFunc(element.id)"
+        >
+          <i class="fa fa-trash-o"></i> &nbsp; Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+  <!-- </div> -->
+</div>
+
+<!-- Edit Modal Start-->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p
+          class="modal-title"
+          id="exampleModalLabel"
+          style="font-size: 25px; margin-bottom: 0px; font-weight: 500"
+        >
+          Edit Qualification
+        </p>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" style="margin: 0">
+          <div class="col-sm">
+            <label
+              for=""
+              style="
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 30px;
+                color: #757575;
+              "
+              >Qualification</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              style="margin: 2% 0"
+              name="Qualification"
+              id="Qualification"
+            />
+          </div>
+          <div class="col-sm">
+            <label
+              for=""
+              style="
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 30px;
+                color: #757575;
+              "
+              >Abbreviation</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="Abbreviation"
+              style="margin: 2% 0"
+              id="Abbreviation"
+            />
+          </div>
+        </div>
+        <!-- <p>Edit Modal body text goes here.</p> -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Modal End-->
+
+<!-- Delete Modal Start-->
+<!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="deleteModalLabel" style="font-size: 25px;
+        margin-bottom: 0px; font-weight: 500;">Delete</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Delete Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Delete Modal End-->

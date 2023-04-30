@@ -1,19 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppointmentComponent } from './appointment/appointment.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { HospitalsComponent } from './hospitals/hospitals.component';
-import { ModeOfPaymentComponent } from './mode-of-payment/mode-of-payment.component';
-import { QualificationComponent } from './qualification/qualification.component';
-import { ServiceComponent } from './service/service.component';
-import { SpecialityComponent } from './speciality/speciality.component';
-import { UserComponent } from './user/user.component';
-import { LocationComponent } from './location/location.component';
-import { AmenitiesComponent } from './amenities/amenities.component';
 import { Component } from '@angular/core';
-import { OwnershipComponent } from './ownership/ownership.component';
 import { compileClassMetadata } from '@angular/compiler';
+<<<<<<< Updated upstream
 import { StateComponent } from './state/state.component';
 import { CityComponent } from './city/city.component';
 import { PatientsComponent } from './patients/patients.component';
@@ -80,6 +69,15 @@ const routes: Routes = [
     path: 'suvidha-kendra-view',
     component: SuvidhaKendraViewComponent,
   },
+=======
+import { LoginComponent } from './login/login';
+import { AuthGuard } from './auth.guard';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: 'auth', loadChildren: () => import ('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'main', loadChildren: () => import ('./main/main.module').then(m => m.MainModule) },
+>>>>>>> Stashed changes
 ];
 
 @NgModule({
