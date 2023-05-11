@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { apiUrl } from './Util/Util';
 
 @Component({
@@ -7,7 +10,11 @@ import { apiUrl } from './Util/Util';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor() {
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private toastrService: ToastrService
+  ) {
     // this.login();
   }
   title = 'Angular-App';
@@ -36,4 +43,12 @@ export class AppComponent implements OnInit {
   //     }
   //   });
   // };
+
+  onEnvChange = (url: string) => {
+    localStorage.setItem('apiUrl', url);
+    localStorage.removeItem('admin');
+    this.router.navigate(['/auth']);
+    // window.location.reload();
+  };
+  public localUrl: string = apiUrl;
 }

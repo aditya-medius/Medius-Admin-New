@@ -39,14 +39,11 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    this.router.navigate(['/main']);
-    this.authService
-      .login(
-        this.loginForm.get('phoneNumber').value,
-        this.loginForm.get('password').value
-      )
-      .subscribe((result) => {
-        console.log('result', result);
-      });
+    let { phoneNumber, password } = this.loginForm.value;
+    this.authService.login(phoneNumber, password).subscribe((result: any) => {
+      if (result.status === 200) {
+        this.router.navigate(['/main/hospital']);
+      }
+    });
   }
 }

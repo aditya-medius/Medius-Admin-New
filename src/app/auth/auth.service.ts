@@ -10,8 +10,8 @@ export class AuthService {
 
   login = (phoneNumber: string, password: string) => {
     return this.httpClient.put(
-      `${apiUrl}/admin/login`,
-      { phoneNumber, password },
+      `${apiUrl}/admin/login?phoneNumber=${phoneNumber}&password=${password}`,
+      {},
       {
         headers: headers,
       }
