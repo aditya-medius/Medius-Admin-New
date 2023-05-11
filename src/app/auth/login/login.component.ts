@@ -1,28 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   hasError: boolean;
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: [ '',
+      phoneNumber: [
+        '',
         Validators.compose([
           Validators.required,
-          Validators.email,
           Validators.minLength(3),
-          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-phoneNumber-address
         ]),
       ],
-      password: [ '',
+      password: [
+        '',
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -33,9 +39,14 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    sessionStorage.setItem('loginChk','true');
-    this.hasError = false;
-    console.log(this.loginForm.value);
+    this.router.navigate(['/main']);
+    this.authService
+      .login(
+        this.loginForm.get('phoneNumber').value,
+        this.loginForm.get('password').value
+      )
+      .subscribe((result) => {
+        console.log('result', result);
+      });
   }
-
 }
