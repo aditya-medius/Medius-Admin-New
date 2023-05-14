@@ -1,152 +1,152 @@
 <!-- <nav class="navbar navbar-light bg-light" style="padding: 0.5% 2%; background: -webkit-linear-gradient(rgb(75 78 213 / 40%), rgb(233 41 118 / 40%) ,rgb(31 130 31 / 40%));"> -->
-<nav
-  class="navbar navbar-light"
-  style="padding: 0.5% 2% 0 2%; background: white"
->
-  <img
-    src="../assets/Medius-Logo.png"
-    alt="Preview Not Available"
-    class="medLogo"
-  />
-
-  <form class="d-flex" class="formWidth">
-    <div class="row" style="margin: 0">
-      <div class="col-sm" style="padding: 3% 0">
-        <select
-          (change)="onEnvChange($event.target.value)"
-          [value]="localUrl"
-          class="form-select"
-          aria-label="Default select example"
-        >
-          <!-- <option selected>Open this select menu</option> -->
-          <option value="http://localhost:3000">Local</option>
-          <option
-            value=" http://medius-prod-2097867460.us-east-2.elb.amazonaws.com"
+    <nav
+    class="navbar navbar-light"
+    style="padding: 0.5% 2% 0 2%; background: white"
+  >
+    <img
+      src="../assets/Medius-Logo.png"
+      alt="Preview Not Available"
+      class="medLogo"
+    />
+  
+    <form class="d-flex" class="formWidth">
+      <div class="row" style="margin: 0">
+        <div class="col-sm" style="padding: 3% 0">
+          <select
+            (change)="onEnvChange($event.target.value)"
+            [value]="localUrl"
+            class="form-select"
+            aria-label="Default select example"
           >
-            Production
-          </option>
-          <option value="http://3.141.91.35:3000">Testing</option>
-          <option value="http://3.18.254.171:3000">Development</option>
-        </select>
-      </div>
-      <div class="col-sm">
-        <div class="row" style="margin: 0; float: right">
-          <div class="col-sm-5">
-            <div class="dot">M</div>
-          </div>
-          <div class="col-sm">
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style="
-                  background: white;
-                  color: #757575;
-                  border: 0;
-                  font-size: 30px;
-                "
-              >
-                <!-- Dropdown button -->
-              </button>
-              <ul
-                class="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-                style="margin: 23% -200%"
-              >
-                <li style="padding: 3% 0">
-                  <a class="dropdown-item" style="background: #e8f3f3">
-                    <div class="row" style="margin: 0">
-                      <div class="logResize">M</div>
-                      <div class="col-sm" style="margin: auto">
-                        <p style="margin: 0">Abhishek Singh</p>
-                        <p style="margin: 0">Admin</p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li style="padding: 3% 0; border-bottom: 1px solid black">
-                  <a class="dropdown-item">My Profile</a>
-                </li>
-                <li style="padding: 3% 0; border-bottom: 1px solid black">
-                  <a class="dropdown-item">Setting</a>
-                </li>
-                <li style="padding: 3% 0">
-                  <a class="dropdown-item">Log Out</a>
-                </li>
-              </ul>
+            <!-- <option selected>Open this select menu</option> -->
+            <option value="http://localhost:3000">Local</option>
+            <option
+              value=" http://medius-prod-2097867460.us-east-2.elb.amazonaws.com"
+            >
+              Production
+            </option>
+            <option value="http://3.141.91.35:3000">Testing</option>
+            <option value="http://3.18.254.171:3000">Development</option>
+          </select>
+        </div>
+        <div class="col-sm">
+          <div class="row" style="margin: 0; float: right">
+            <div class="col-sm-5">
+              <div class="dot">M</div>
             </div>
+            <div class="col-sm">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="
+                    background: white;
+                    color: #757575;
+                    border: 0;
+                    font-size: 30px;
+                  "
+                >
+                  <!-- Dropdown button -->
+                </button>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+                  style="margin: 23% -200%"
+                >
+                  <li style="padding: 3% 0">
+                    <a class="dropdown-item" style="background: #e8f3f3">
+                      <div class="row" style="margin: 0">
+                        <div class="logResize">M</div>
+                        <div class="col-sm" style="margin: auto">
+                          <p style="margin: 0">Abhishek Singh</p>
+                          <p style="margin: 0">Admin</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li style="padding: 3% 0; border-bottom: 1px solid black">
+                    <a class="dropdown-item">My Profile</a>
+                  </li>
+                  <li style="padding: 3% 0; border-bottom: 1px solid black">
+                    <a class="dropdown-item">Setting</a>
+                  </li>
+                  <li style="padding: 3% 0">
+                    <a class="dropdown-item">Log Out</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+  
+            <!-- <div>
+              <select class="form-select">
+                <option value="">
+                  <div class="row">
+                    <div class="dot">M</div>
+                    <div>Abhishek Singh</div>
+                    <div>Admin</div>
+                  </div>
+                </option>
+                <option value="myprofile">My Profile</option>
+                <option value="setting">Setting</option>
+                <option value="logout">Log Out</option>
+              </select>
+            </div> -->
           </div>
-
-          <!-- <div>
-            <select class="form-select">
-              <option value="">
-                <div class="row">
-                  <div class="dot">M</div>
-                  <div>Abhishek Singh</div>
-                  <div>Admin</div>
-                </div>
-              </option>
-              <option value="myprofile">My Profile</option>
-              <option value="setting">Setting</option>
-              <option value="logout">Log Out</option>
-            </select>
-          </div> -->
         </div>
       </div>
-    </div>
-
-    <!-- <div>
-      <select class="form-select" aria-label="Default select example">
-        <option value="myprofile" selected>My Profile</option>
-        <option value="setting">Setting</option>
-        <option value="logout">Log Out</option>
-      </select>
-    </div> -->
-  </form>
-</nav>
-
-<!-- <div class="v1"></div>
-<div class="v2"></div>
-<div class="v3"></div> -->
-
-<!-- <div class="header">
-    <h1 class="logo">MEDIUS</h1>
-
-    <div class="health">
-        <i class="fa fa-th-large"></i>
-
-        <form style="width: 600px;">
-          <div class="input-container">
-          <i class="fa fa-search icon"></i>
-        <input type="search" placeholder="Search here....."
-        style="background: rgb(223, 231, 242);
-        border-style: none;
-        width: 600px; font-size: 20px;" >
+  
+      <!-- <div>
+        <select class="form-select" aria-label="Default select example">
+          <option value="myprofile" selected>My Profile</option>
+          <option value="setting">Setting</option>
+          <option value="logout">Log Out</option>
+        </select>
+      </div> -->
+    </form>
+  </nav>
+  
+  <!-- <div class="v1"></div>
+  <div class="v2"></div>
+  <div class="v3"></div> -->
+  
+  <!-- <div class="header">
+      <h1 class="logo">MEDIUS</h1>
+  
+      <div class="health">
+          <i class="fa fa-th-large"></i>
+  
+          <form style="width: 600px;">
+            <div class="input-container">
+            <i class="fa fa-search icon"></i>
+          <input type="search" placeholder="Search here....."
+          style="background: rgb(223, 231, 242);
+          border-style: none;
+          width: 600px; font-size: 20px;" >
+          </div>
+        </form>AuthGuard
         </div>
-      </form>AuthGuard
-      </div>
-</div> -->
-
-<div class="row" style="margin: 0">
-  <!-- <div class="col-sm">
-    hi
-  </div>
-  <div class="col-sm">
-    Hello
   </div> -->
-  <div
-    class="col-lg-2 col-md-4 col-sm-4"
-    style="border-top: 1px solid #00000036"
-  >
-    <app-sidenav></app-sidenav>
+  
+  <div class="row" style="margin: 0">
+    <!-- <div class="col-sm">
+      hi
+    </div>
+    <div class="col-sm">
+      Hello
+    </div> -->
+    <!-- <div
+      class="col-lg-2 col-md-4 col-sm-4"
+      style="border-top: 1px solid #00000036"
+    >
+      <app-sidenav></app-sidenav>
+    </div> -->
+    <div
+      class="col-lg col-md col-sm"
+      style="border-top: 1px solid #00000036; overflow: scroll"
+    >
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <div
-    class="col-lg col-md col-sm"
-    style="border-top: 1px solid #00000036; overflow: scroll"
-  >
-    <router-outlet></router-outlet>
-  </div>
-</div>
