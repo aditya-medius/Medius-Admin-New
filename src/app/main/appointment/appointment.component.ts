@@ -40,21 +40,21 @@ export class AppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = [
-      {
-        userName: 'Dharamraj Acharya',
-        bookingId: '11111123',
-        bookingDate: '20 mar 2022',
-        doctorName: 'Dr. Deepak Kumar',
-        specialization: 'Cardiology',
-        hospitalName: 'Dreamcare Hospital',
-        appointmentTime: '11.00 AM - 11.35 AM',
-        appointmentDate: '30 mar 2022',
-        amount: '300',
-        status1: 'New',
-        status2: 'Upcoming',
-        gender: 'Male',
-        age: '32yrs.',
-      },
+      // {
+      //   userName: 'Dharamraj Acharya',
+      //   bookingId: '11111123',
+      //   bookingDate: '20 mar 2022',
+      //   doctorName: 'Dr. Deepak Kumar',
+      //   specialization: 'Cardiology',
+      //   hospitalName: 'Dreamcare Hospital',
+      //   appointmentTime: '11.00 AM - 11.35 AM',
+      //   appointmentDate: '30 mar 2022',
+      //   amount: '300',
+      //   status1: 'New',
+      //   status2: 'Upcoming',
+      //   gender: 'Male',
+      //   age: '32yrs.',
+      // },
     ];
     this.getAllAppointments();
   }
@@ -101,15 +101,21 @@ export class AppointmentComponent implements OnInit {
       console.log('ufggfdsjvhdsddssd', result);
       if (result.status === 200) {
         this.dataSource = result.data.map((e: any, index: Number) => ({
-          userName: `${e?.patient?.firstName} ${e?.patient?.lastName}`,
+          userName: `${
+            e?.subPatient
+              ? e?.subPatient?.firstName + ' ' + e?.subPatient?.lastName
+              : e?.patient?.firstName + ' ' + e?.patient?.lastName
+          }`,
           bookingId: e?.appointmentId,
-          bookingDate: moment(e?.createdAt).format('dd mm yyyy'),
+          // bookingDate: moment(e?.createdAt).format('dd mm yyyy'),
+          bookingDate: moment(e?.createdAt).format('DD-MM-yyyy'),
           doctorName: `${e?.doctors?.firstName} ${e?.doctors?.lastName}`,
           specialization: e?.doctors?.specialization?.map(
             (elem: any) => elem.specialityName
           ),
           hospitalName: e?.Hospital?.name,
-          appointmentDate: moment(e?.time?.date).format('dd mm yyyy'),
+          // appointmentDate: moment(e?.time?.date).format('dd mm yyyy'),
+          appointmentDate: moment(e?.time?.date).format('DD-MM-yyyy'),
           appointmentTime: `${e?.time?.from?.time}:${e?.time?.from?.division} - ${e?.time?.till?.time}:${e?.time?.till?.division}`,
           amount: '',
           status1: `${
