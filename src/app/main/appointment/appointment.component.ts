@@ -98,7 +98,6 @@ export class AppointmentComponent implements OnInit {
 
   getAllAppointments = () => {
     this.appointmentService.getAllAppointments().subscribe((result: any) => {
-      console.log('ufggfdsjvhdsddssd', result);
       if (result.status === 200) {
         this.dataSource = result.data.map((e: any, index: Number) => ({
           userName: `${
