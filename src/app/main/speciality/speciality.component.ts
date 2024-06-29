@@ -25,7 +25,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer,
     private dom: DomSanitizer
-  ) {}
+  ) { }
 
   speciality: Array<any> | null = null;
   serviceName: string | null = null;
@@ -127,7 +127,6 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
           response: { image },
         } = res.data;
         if (res.status === 200) {
-          this.getAllServices();
           this.formData.delete('profileImage');
           this.formData.delete('user');
           // this.formData.delete('userId');
@@ -138,6 +137,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
               if (result.statues === 400) {
                 this.toastrService.error(result.message);
               } else {
+                this.getAllServices();
                 // this.formData.append('userId', result.data._id);
               }
             });
@@ -145,7 +145,6 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
           this.toastrService.error('Upload unsuccessful.');
         }
       });
-    this.getAllServices();
   };
 
   specialityToBeEdited: string = '';
