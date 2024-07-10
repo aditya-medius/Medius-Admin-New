@@ -6,7 +6,7 @@ import { apiUrl, headers } from '../Util/Util';
   providedIn: 'root',
 })
 export class ModeOfPaymentService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getAllFees = () => {
     return this.httpClient.get(`${apiUrl}/admin/getFees`, { headers });
@@ -23,4 +23,8 @@ export class ModeOfPaymentService {
       { headers }
     );
   };
+
+  createFee = (name: string, feeAmount: number) => {
+    return this.httpClient.post(`${apiUrl}/admin/createFee`, { name, feeAmount }, { headers })
+  }
 }
