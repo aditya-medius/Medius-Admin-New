@@ -48,3 +48,9 @@ export const patientInterceptor = (patientList: any) => {
   data = data.map((e: any) => ({}));
   return { status: patientList.status, data, message: patientList.message };
 };
+
+export interface Result {
+  data: any,
+  status: number,
+  message: string
+}

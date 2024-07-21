@@ -38,7 +38,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTabsModule} from '@angular/material/tabs';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HelplineComponent } from './helpline/helpline.component'
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     DoctorViewComponent,
     PatientViewComponent,
     SuvidhaKendraViewComponent,
-    MainComponent],
+    MainComponent,
+    HelplineComponent],
   imports: [
     CommonModule,
     MainRoutingModule,

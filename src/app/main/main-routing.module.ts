@@ -21,6 +21,7 @@ import { PatientViewComponent } from './patient-view/patient-view.component';
 import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra-view.component';
 import { OwnershipComponent } from './ownership/ownership.component';
 import { MainComponent } from './main.component';
+import { HelplineComponent } from './helpline/helpline.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, children: [
@@ -46,6 +47,11 @@ const routes: Routes = [
     {
       path: 'amenities',
       component: AmenitiesComponent,
+    },
+
+    {
+      path: "helpline",
+      component: HelplineComponent
     },
 
     {
