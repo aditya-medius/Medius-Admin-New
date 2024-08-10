@@ -23,9 +23,10 @@ export class ServiceService {
     );
   };
 
-  addSpeciality = (specialityName: string, image: string = '') => {
+  addSpeciality = (specialityName: string, specialityNameh: string, image: string = '') => {
     return this.httpClient.post(`${apiUrl}/admin/addSpeciality`, {
       specialityName,
+      specialityNameh,
       image,
     });
   };

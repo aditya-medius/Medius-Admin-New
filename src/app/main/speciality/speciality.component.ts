@@ -36,6 +36,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
 
   speciality: Array<any> | null = null;
   serviceName: string | null = null;
+  serviceNameh: string | null = null
 
   ngOnInit(): void {
     this.dataSource = [];
@@ -102,27 +103,36 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
   }
 
   submitService = () => {
-    if (!this.serviceName) {
+    if (!(this.serviceName && this.serviceNameh)) {
       this.toastrService.error('Enter a service name');
       return;
+    }
+    if (!this.formData.get("profileImage")) {
+      this.toastrService.error('select an image');
+      return
     }
     this.service
       .uploadServiceImage(this.formData as FormData)
       .subscribe((res: any) => {
         let {
           response: { image },
-        } = res.data;
+        } = res?.data;
         if (res.status === 200) {
           this.formData.delete('profileImage');
           this.formData.delete('user');
           // this.formData.delete('userId');
           // this.serviceName = null;
           this.service
-            .addSpeciality(this.serviceName as string, image)
+            .addSpeciality(this.serviceName as string, this.serviceNameh as string, image)
             .subscribe((result: any) => {
               if (result.statues === 400) {
                 this.toastrService.error(result.message);
               } else {
+                this.toastrService.success(result.message);
+                this.serviceName = "";
+                this.serviceNameh = "";
+                this.formData.set("profileImage", "")
+                this.formData.set("user", "")
                 this.getAllServices();
                 // this.formData.append('userId', result.data._id);
               }
