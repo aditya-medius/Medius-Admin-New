@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { apiUrl } from '../../Util/Util';
 import { lastValueFrom } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-speciality',
@@ -16,16 +17,22 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./speciality.component.scss'],
 })
 export class SpecialityComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['srno', 'specialityName', 'icons', 'actions'];
-  // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['srno', 'specialityName', 'specialityNameh', 'icons', 'actions'];
   dataSource: any;
 
   constructor(
     private service: ServiceService,
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer,
-    private dom: DomSanitizer
+    private dom: DomSanitizer,
+    private formBuilder: FormBuilder
   ) { }
+
+  editSpecialityForm = this.formBuilder.group({
+    specialityName: new FormControl(""),
+    specialityNameh: new FormControl(""),
+    icons: new FormControl("")
+  });
 
   speciality: Array<any> | null = null;
   serviceName: string | null = null;
@@ -43,12 +50,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -76,12 +78,6 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     this.service.getAllServices().subscribe((result: any) => {
       this.speciality = result.data['Speciality'].map(
         (e: any, index: Number) => {
-          console.log(
-            'image',
-            `${apiUrl}/${e.image}?token=${JSON.parse(
-              localStorage.getItem('admin')
-            )}`
-          );
           return {
             srno: `#Q00${index}`,
             ...e,
@@ -96,7 +92,6 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
 
   formData: FormData = new FormData();
   uploadSpecialization(fileToUpload: any) {
-    console.log('Ovgdsgshbgdsg dsds');
     fileToUpload = fileToUpload[0];
     (this.formData as FormData).append(
       'profileImage',
@@ -111,15 +106,6 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
       this.toastrService.error('Enter a service name');
       return;
     }
-    // this.service
-    //   .addSpeciality(this.serviceName as string)
-    //   .subscribe((result: any) => {
-    //     if (result.statues === 400) {
-    //       this.toastrService.error(result.message);
-    //     } else {
-    //       // this.formData.append('userId', result.data._id);
-    //     }
-    //   });
     this.service
       .uploadServiceImage(this.formData as FormData)
       .subscribe((res: any) => {
@@ -148,18 +134,16 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
   };
 
   specialityToBeEdited: string = '';
-  editSpeciality = (id: string) => {
-    this.specialityToBeEdited = id;
+  editSpeciality = (speciality: any) => {
+    this.specialityToBeEdited = speciality._id;
+    this.editSpecialityForm.setValue({
+      specialityName: speciality.specialityName ?? "",
+      specialityNameh: speciality.specialityNameh ?? "",
+      icons: speciality.img ?? ""
+    })
   };
 
   updateSpeciality = async () => {
-    // this.service.updateSpeciality();
-    console.log(':dshfcdsddssd', this.formData.get('profileImage'));
-
-    if (!this.serviceName) {
-      this.toastrService.error('Enter a service name');
-      return;
-    }
     let newImage: string = '';
     if (this.formData.get('profileImage')) {
       let res: any = await lastValueFrom(
@@ -177,50 +161,22 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
 
     this.formData.delete('profileImage');
     this.formData.delete('user');
+    const { specialityName, specialityNameh } = this.editSpecialityForm.value
     this.service
       .updateSpeciality(
         this.specialityToBeEdited,
         newImage,
-        this.serviceName as string
+        specialityName as string,
+        specialityNameh as string
       )
       .subscribe((result: any) => {
         if (result.statues === 400) {
           this.toastrService.error(result.message);
         } else {
-          // this.formData.append('userId', result.data._id);
+          this.toastrService.success(`${result.message}. Please close the popup`)
         }
+        this.getAllServices();
       });
 
-    this.getAllServices();
-    // this.service
-    //   .uploadServiceImage(this.formData as FormData)
-    //   .subscribe((res: any) => {
-    //     let {
-    //       response: { image },
-    //     } = res.data;
-    //     if (res.status === 200) {
-    //       this.getAllServices();
-    //       this.formData.delete('profileImage');
-    //       this.formData.delete('user');
-    //       // this.formData.delete('userId');
-    //       // this.serviceName = null;
-    //       this.service
-    //         .updateSpeciality(
-    //           this.specialityToBeEdited,
-    //           this.serviceName as string,
-    //           image
-    //         )
-    //         .subscribe((result: any) => {
-    //           if (result.statues === 400) {
-    //             this.toastrService.error(result.message);
-    //           } else {
-    //             // this.formData.append('userId', result.data._id);
-    //           }
-    //         });
-    //     } else {
-    //       this.toastrService.error('Upload unsuccessful.');
-    //     }
-    //   });
-    this.getAllServices();
   };
 }

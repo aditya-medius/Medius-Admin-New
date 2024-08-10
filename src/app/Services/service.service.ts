@@ -60,13 +60,14 @@ export class ServiceService {
     );
   };
 
-  updateSpeciality = (specialityId: string, image: string, name: string) => {
+  updateSpeciality = (specialityId: string, image: string, name: string, specialityNameh: string) => {
     return this.httpClient.post(
       `${apiUrl}/admin/editSpeciality`,
       {
         specialityId,
         image,
         name,
+        specialityNameh
       },
       { headers: this.headers }
     );
