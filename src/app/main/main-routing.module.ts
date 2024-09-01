@@ -22,71 +22,74 @@ import { SuvidhaKendraViewComponent } from './suvidha-kendra-view/suvidha-kendra
 import { OwnershipComponent } from './ownership/ownership.component';
 import { MainComponent } from './main.component';
 import { HelplineComponent } from './helpline/helpline.component';
+import { AuthGuard } from '../auth.guard';
 
 const routes: Routes = [
-  { path: '', component: MainComponent, children: [
-    { path: 'dashboard', component: DashboardComponent },
+  {
+    path: '', component: MainComponent, children: [
+      { path: 'dashboard', component: DashboardComponent },
 
-    { path: 'appointment', component: AppointmentComponent },
-    { path: 'hospital', component: HospitalsComponent },
+      { path: 'appointment', component: AppointmentComponent },
+      { path: 'hospital', component: HospitalsComponent },
 
-    { path: 'doctor', component: DoctorComponent },
+      { path: 'doctor', component: DoctorComponent },
 
-    { path: 'user', component: UserComponent },
-    { path: 'patients', component: PatientsComponent },
-    {
-      path: 'services',
-      component: ServiceComponent,
-    },
+      { path: 'user', component: UserComponent },
+      { path: 'patients', component: PatientsComponent },
+      {
+        path: 'services',
+        component: ServiceComponent,
+      },
 
-    { path: 'speciality', component: SpecialityComponent },
-    { path: 'qualification', component: QualificationComponent },
-    { path: 'location', component: LocationComponent },
+      { path: 'speciality', component: SpecialityComponent },
+      { path: 'qualification', component: QualificationComponent },
+      { path: 'location', component: LocationComponent },
 
-    { path: 'payment', component: ModeOfPaymentComponent },
-    {
-      path: 'amenities',
-      component: AmenitiesComponent,
-    },
+      { path: 'payment', component: ModeOfPaymentComponent },
+      {
+        path: 'amenities',
+        component: AmenitiesComponent,
+      },
 
-    {
-      path: "helpline",
-      component: HelplineComponent
-    },
+      {
+        path: "helpline",
+        component: HelplineComponent
+      },
 
-    {
-      path: 'Ownership',
-      component: OwnershipComponent,
-    },
-    {
-      path: 'state',
-      component: StateComponent,
-    },
-    {
-      path: 'city',
-      component: CityComponent,
-    },
-    {
-      path: 'suvidha-kendra',
-      component: SuvidhaKendraComponent,
-    },
-    {
-      path: 'hospital-view',
-      component: HospitalsViewComponent,
-    },
-    {
-      path: 'doctor-view',
-      component: DoctorViewComponent,
-    },
-    {
-      path: 'patient-view',
-      component: PatientViewComponent,
-    },
-    {
-      path: 'suvidha-kendra-view',
-      component: SuvidhaKendraViewComponent,
-    },
-  ] },
+      {
+        path: 'Ownership',
+        component: OwnershipComponent,
+      },
+      {
+        path: 'state',
+        component: StateComponent,
+      },
+      {
+        path: 'city',
+        component: CityComponent,
+      },
+      {
+        path: 'suvidha-kendra',
+        component: SuvidhaKendraComponent,
+      },
+      {
+        path: 'hospital-view',
+        component: HospitalsViewComponent,
+      },
+      {
+        path: 'doctor-view',
+        component: DoctorViewComponent,
+      },
+      {
+        path: 'patient-view',
+        component: PatientViewComponent,
+      },
+      {
+        path: 'suvidha-kendra-view',
+        component: SuvidhaKendraViewComponent,
+      },
+    ]
+  },
 ];
 
 @NgModule({

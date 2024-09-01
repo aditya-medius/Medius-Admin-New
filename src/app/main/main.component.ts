@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 // import { ToastrService } from 'ngx-toastr';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
@@ -86,13 +86,11 @@ export class MainComponent implements OnInit {
   public menuItems: any[] = [];
   public isCollapsed = true;
   selected: any;
-  constructor(private router:Router, private http: HttpClient, private toastrService: ToastrService) { 
-    this.login();
+  constructor(private router: Router, private http: HttpClient, private toastrService: ToastrService) {
   }
 
 
   ngOnInit(): void {
-
     this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
@@ -101,7 +99,7 @@ export class MainComponent implements OnInit {
 
   getSelectedIcon(data) {
 
-    if(this.selected) {
+    if (this.selected) {
       document.getElementById(this.selected).style.fontFamily = 'Roboto';
       document.getElementById(this.selected).style.fontStyle = 'normal';
       document.getElementById(this.selected).style.fontWeight = '400';
@@ -132,19 +130,4 @@ export class MainComponent implements OnInit {
   };
 
   public localUrl: string = apiUrl;
-  login = () => {
-    let url: string = `${apiUrl}/admin/login?phoneNumber=8826332442&password=123456`;
-    return this.http.put(url, {}).subscribe((result: any) => {
-      if (result.status == 200) {
-        this.toastrService.success(`${result.message}`);
-        localStorage.setItem('admin', JSON.stringify(result.data));
-      } else if (result.status == 400) {
-        if (result.type == 'JsonWebTokenError') {
-          this.toastrService.error('Invalid OTP');
-        }
-        this.toastrService.error(result.message);
-      }
-    });
-  };
-
 }

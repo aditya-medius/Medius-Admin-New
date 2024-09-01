@@ -30,6 +30,9 @@ export class PatientsComponent implements OnInit {
     'gender',
     'email',
     'mobileNo',
+    'phoneNumberVerified',
+    'lastVerifiedPhone',
+    'createdAt',
     'view',
   ];
 
@@ -40,24 +43,10 @@ export class PatientsComponent implements OnInit {
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.dataSource = [
-      // {
-      //   patientName: 'Dr. Deepak Kumar',
-      //   gender: 'Male',
-      //   age: '20',
-      //   email: 'test@gmail.com',
-      //   mobileNo: '8265528510',
-      // },
-      // {
-      //   patientName: 'Dr. Deepak',
-      //   gender: 'Female',
-      //   age: '18',
-      //   email: 'test2@gmail.com',
-      //   mobileNo: '7265528510',
-      // },
     ];
     this.getPatientList();
   }
@@ -95,6 +84,9 @@ export class PatientsComponent implements OnInit {
           age: moment(e.DOB).fromNow().split(' ').slice(0, 2).join(' '),
           email: e.email,
           mobileNo: e.phoneNumber,
+          phoneNumberVerified: e.phoneNumberVerified,
+          lastVerifiedPhone: moment(e.lastTimePhoneNumberVerified).format("DD-MM-YYYY"),
+          createdAt: e.createdAt
         }));
         this.toastrService.success(result.message);
       } else {

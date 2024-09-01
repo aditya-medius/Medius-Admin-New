@@ -2,10 +2,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 export const apiUrl = localStorage.getItem('apiUrl') ?? environment.apiUrl;
-// export const token = JSON.parse(localStorage.getItem('admin') as string)
-//   ? JSON.parse(localStorage.getItem('admin') as string).data
-//   : null;
-
 export const token =
   (JSON.parse(localStorage.getItem('admin')) as string) ?? null;
 

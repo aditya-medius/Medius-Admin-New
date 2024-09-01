@@ -1,8 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { apiUrl } from './Util/Util';
+import { AuthService, Environment } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +11,41 @@ import { apiUrl } from './Util/Util';
 export class AppComponent implements OnInit {
   constructor(
     private router: Router,
-    private http: HttpClient,
-    private toastrService: ToastrService
+    private authService: AuthService
   ) {
-    // this.login();
   }
   title = 'Angular-App';
 
+  isLoggedIn: Boolean = false
+  _envName: string = ""
+  _environments: Array<Environment> = []
+
+  get environments(): Array<Environment> {
+    return this._environments
+  }
+
+  set environments(value: Array<Environment>) {
+    this._environments = value
+  }
+
+  get envName(): string {
+    return this._envName
+  }
+
+  set envName(value: string) {
+    this._envName = value
+  }
+
   ngOnInit(): void {
-    // this.login();
+    this.authService.isLoggedin.subscribe((isLoggedIn: Boolean) => this.isLoggedIn = isLoggedIn)
+    this.authService.environment.subscribe((env: string) => this.envName = env)
+    this.authService.environments.subscribe((envs: Array<Environment>) => this.environments = envs)
+  }
+
+  logout(): void {
+    localStorage.removeItem('admin');
+    this.router.navigate(['/auth']);
+    window.location.reload();
   }
 
   onEnvChange = (url: string) => {

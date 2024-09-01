@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
     let { phoneNumber, password } = this.loginForm.value;
     this.authService.login(phoneNumber, password).subscribe((result: any) => {
       if (result.status === 200) {
-        this.router.navigate(['/main/hospital']);
+        localStorage.setItem('admin', JSON.stringify(result.data));
+        this.authService.setIsLoggedIn(true)
+        this.router.navigate(['/main/speciality']);
       }
     });
   }

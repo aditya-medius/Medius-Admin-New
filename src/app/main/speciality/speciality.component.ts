@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from '../../Services/service.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,7 +7,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { apiUrl } from '../../Util/Util';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, retry } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -25,7 +25,8 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer,
     private dom: DomSanitizer,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) { }
 
   editSpecialityForm = this.formBuilder.group({
@@ -45,6 +46,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild("specialityImage") specialityImage: ElementRef;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -82,6 +84,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
           return {
             srno: `#Q00${index}`,
             ...e,
+            // img: e.image,
             img: `${apiUrl}/${e.image}?token=${JSON.parse(
               localStorage.getItem('admin')
             )}`,
@@ -120,8 +123,7 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
         if (res.status === 200) {
           this.formData.delete('profileImage');
           this.formData.delete('user');
-          // this.formData.delete('userId');
-          // this.serviceName = null;
+
           this.service
             .addSpeciality(this.serviceName as string, this.serviceNameh as string, image)
             .subscribe((result: any) => {
@@ -129,12 +131,8 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
                 this.toastrService.error(result.message);
               } else {
                 this.toastrService.success(result.message);
-                this.serviceName = "";
-                this.serviceNameh = "";
-                this.formData.set("profileImage", "")
-                this.formData.set("user", "")
                 this.getAllServices();
-                // this.formData.append('userId', result.data._id);
+                this.clearFormData();
               }
             });
         } else {
@@ -189,4 +187,12 @@ export class SpecialityComponent implements OnInit, AfterViewInit {
       });
 
   };
+
+  clearFormData = () => {
+    this.serviceName = "";
+    this.serviceNameh = "";
+    this.formData.delete("profileImage")
+    this.formData.delete("user")
+    this.specialityImage.nativeElement.value = null
+  }
 }

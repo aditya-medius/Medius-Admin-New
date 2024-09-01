@@ -9,6 +9,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-hospitals',
@@ -16,21 +17,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./hospitals.component.scss'],
 })
 export class HospitalsComponent implements OnInit {
-  // displayedColumns: string[] = [
-  //   'hospitalName',
-  //   'city',
-  //   'locality',
-  //   'appointmentNo',
-  //   'status',
-  //   'view',
-  // ];
 
   displayedColumns: string[] = [
     'hospitalName',
     'city',
     'mobileNo',
-    // 'appointmentNo',
     'status',
+    'phoneNumberVerified',
+    'onHold_inactive',
+    'lastVerifiedPhone',
     'view',
   ];
 
@@ -41,22 +36,12 @@ export class HospitalsComponent implements OnInit {
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer,
     private router: Router
-  ) {}
+  ) { }
 
   hospitalList: Array<any> | null = null;
 
   ngOnInit(): void {
-    // this.getAllHospitals();
-    this.dataSource = [
-      // {
-      //   hospitalName: 'Sanjeevani Hospital',
-      //   city: 'Delhi',
-      //   locality: 'Dadar West',
-      //   // appointmentNo: '25',
-      //   mobileNo: '87965541023',
-      //   verified: true,
-      // },
-    ];
+    this.dataSource = [];
     this.getAllHospitals();
   }
 
@@ -71,6 +56,9 @@ export class HospitalsComponent implements OnInit {
           // appointmentNo: '',
           mobileNo: e.contactNumber,
           verified: e.verified,
+          status: e.status,
+          phoneNumberVerified: e.phoneNumberVerified,
+          lastVerifiedPhone: moment(e.lastTimePhoneNumberVerified).format("DD-MM-YYYY"),
           id: e._id,
         }));
         this.toastrService.success(result.message);
