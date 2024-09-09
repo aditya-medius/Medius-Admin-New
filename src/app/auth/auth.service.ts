@@ -27,7 +27,7 @@ export class AuthService {
 
   private _environments: Array<Environment> = [
     { name: "Local", url: "http://localhost:3000" },
-    { name: "Production", url: "http://13.235.135.237:3000" },
+    { name: "Production", url: "http://medius-prod-1715708538.ap-south-1.elb.amazonaws.com:80" },
     { name: "Testing", url: "http://15.207.210.44:3000" },
   ]
 
