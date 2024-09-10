@@ -29,12 +29,7 @@ export class AmenitiesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // this.getAllAmenities();
-    this.dataSource = [
-      { srno: '#Q001', amenityName: 'Parking' },
-      { srno: '#Q002', amenityName: 'Patient lift' },
-      { srno: '#Q003', amenityName: 'Cafeteria' },
-      { srno: '#Q004', amenityName: 'Wheelchair' },
-    ];
+    this.dataSource = [];
   }
 
   @ViewChild(MatSort) sort: MatSort;
