@@ -119,7 +119,6 @@ export class HospitalsViewComponent implements OnInit {
     this.hospitalService.getHospitalById(id).subscribe((result: any) => {
       if (result.status === 200) {
         this.hospitalData = result.data;
-        console.log('jhdhgdshsdsd', this, this.hospitalData);
         this.hospitalData = {
           ...this.hospitalData,
           services: this.hospitalData.services.map((e: any) => e.name),

@@ -1,0 +1,7 @@
+{
+    "Environment": {
+        "Local": "http://localhost:3000",
+        "Production": "http://medius-prod-1715708538.ap-south-1.elb.amazonaws.com:80",
+        "Testing": "http://15.207.210.44:3000"
+    }
+}

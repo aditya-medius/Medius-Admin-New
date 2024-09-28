@@ -4,7 +4,6 @@ import { apiUrl, headers } from '../Util/Util';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { env } from 'process';
 
-
 export interface Environment {
   name: string,
   url: string,
@@ -28,7 +27,7 @@ export class AuthService {
   private _environments: Array<Environment> = [
     { name: "Local", url: "http://localhost:3000" },
     { name: "Production", url: "http://medius-prod-1715708538.ap-south-1.elb.amazonaws.com:80" },
-    { name: "Testing", url: "http://15.207.210.44:3000" },
+    { name: "Testing", url: "http://3.110.132.27:3000" },
   ]
 
   private _isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
