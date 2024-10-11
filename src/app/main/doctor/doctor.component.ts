@@ -41,7 +41,7 @@ export class DoctorComponent implements OnInit {
     private toastrService: ToastrService,
     private _liveAnnouncer: LiveAnnouncer,
     private router: Router
-  ) {}
+  ) { }
 
   doctorList: Array<any> | null = null;
   ngOnInit(): void {
@@ -81,7 +81,7 @@ export class DoctorComponent implements OnInit {
           speciality: e.specialization
             .map((e: any) => e.specialityName)
             .join(' '),
-          experience: e.overallExperience,
+          experience: `${e?.totalExperience ? `${e?.totalExperience} years` : ""}`,
           mobile: e.phoneNumber,
           appointmentNo: e.appointmentNo,
           id: e._id,

@@ -28,6 +28,7 @@ export class AppointmentComponent implements OnInit {
     'doctorName',
     'appointmentTime',
     'amount',
+    'appointmentType',
     'status',
   ];
 
@@ -113,6 +114,7 @@ export class AppointmentComponent implements OnInit {
           specialization: e?.doctors?.specialization?.map(
             (elem: any) => elem.specialityName
           ),
+          appointmentType: e?.appointmentType,
           hospitalName: e?.Hospital?.name,
           // appointmentDate: moment(e?.time?.date).format('dd mm yyyy'),
           appointmentDate: moment(e?.time?.date).format('DD-MM-yyyy'),
